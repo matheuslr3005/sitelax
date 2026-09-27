@@ -322,10 +322,20 @@
     }
   }
 
+  function initHero3D() {
+    if (!window.LaxHero3D) return;
+    if (mainEl.querySelector("#heroObject")) {
+      window.LaxHero3D.mount();
+    } else {
+      window.LaxHero3D.unmount();
+    }
+  }
+
   function initPage(targetUrl) {
     updateNavActive();
     initReveal();
     initHeroSwitcher();
+    initHero3D();
     initServicePanels();
     initContactForm();
     scrollToTarget(targetUrl || window.location.href);
