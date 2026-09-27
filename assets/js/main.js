@@ -307,13 +307,28 @@
   /* -----------------------------------------------------
      Inicialização por página
      ----------------------------------------------------- */
-  function initPage() {
+  function scrollToTarget(rawUrl) {
+    var hash = "";
+    try {
+      hash = new URL(rawUrl, window.location.origin).hash;
+    } catch (e) {
+      hash = "";
+    }
+    var target = hash ? document.querySelector(hash) : null;
+    if (target) {
+      target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function initPage(targetUrl) {
     updateNavActive();
     initReveal();
     initHeroSwitcher();
     initServicePanels();
     initContactForm();
-    window.scrollTo(0, 0);
+    scrollToTarget(targetUrl || window.location.href);
   }
 
   /* -----------------------------------------------------
@@ -357,7 +372,7 @@
             window.history.pushState({}, "", url);
           }
 
-          initPage();
+          initPage(url);
           reveal();
         })
         .catch(function () {

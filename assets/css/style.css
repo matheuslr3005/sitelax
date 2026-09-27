@@ -937,6 +937,7 @@ body.has-fine-pointer .cursor-ring {
   padding-block: var(--space-7);
   border-top: 1px solid var(--color-hairline);
   overflow: hidden;
+  scroll-margin-top: 90px;
   transition: background-color var(--dur-slow) var(--ease-in-out);
 }
 
