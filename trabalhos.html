@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trabalhos — LAX Assessoria de Marketing</title>
+  <meta name="description" content="Os cases da LAX estão a caminho. Veja onde já atuamos e fale com a gente pra ver exemplos concretos." />
+  <link rel="icon" href="assets/img/logo/lax-color.png" type="image/png" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="curtain" id="curtain" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+  <nav class="site-nav">
+    <a class="brand" href="index.html" aria-label="LAX — página inicial">
+      <img src="assets/img/logo/lax-color.png" alt="LAX" width="90" height="26" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-page="home">Início</a></li>
+      <li><a href="servicos.html" data-page="servicos">Serviços</a></li>
+      <li><a href="trabalhos.html" data-page="trabalhos">Trabalhos</a></li>
+      <li><a href="time.html" data-page="time">Time</a></li>
+    </ul>
+    <a class="nav-cta" href="contato.html" data-page="contato">Vamos conversar</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-page="home">Início</a>
+    <a href="servicos.html" data-page="servicos">Serviços</a>
+    <a href="trabalhos.html" data-page="trabalhos">Trabalhos</a>
+    <a href="time.html" data-page="time">Time</a>
+    <a href="contato.html" data-page="contato">Contato</a>
+  </div>
+
+  <main id="main" data-page="trabalhos">
+    <div class="page-head container">
+      <p class="eyebrow" data-reveal>Trabalhos</p>
+      <h1 data-reveal>Nossos cases estão <em>a caminho</em>.</h1>
+      <p data-reveal>Ainda não publicamos estudos de caso por aqui — mas já estamos com a mão na massa em projetos reais. Quer ver exemplos concretos agora? Chama a gente.</p>
+    </div>
+
+    <section class="section container">
+      <div class="empty-state">
+        <div class="empty-slot" data-reveal>
+          <p class="index">01</p>
+          <p>Case em produção</p>
+        </div>
+        <div class="empty-slot" data-reveal>
+          <p class="index">02</p>
+          <p>Case em produção</p>
+        </div>
+        <div class="empty-slot" data-reveal>
+          <p class="index">03</p>
+          <p>Case em produção</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Onde já atuamos</p>
+        <h2>Sem nicho fixo — a gente se adapta ao seu setor.</h2>
+      </div>
+      <div class="tag-cloud" data-reveal>
+        <span>E-commerce</span>
+        <span>Serviços</span>
+        <span>Saúde e bem-estar</span>
+        <span>Educação</span>
+        <span>Moda</span>
+        <span>Alimentação</span>
+        <span>Tecnologia</span>
+        <span>Eventos</span>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Quer ver na prática?</p>
+        <h2 data-reveal>Marca uma<br />conversa.</h2>
+        <a class="btn" data-reveal href="contato.html">Fale com a gente <span class="btn-arrow">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <a class="brand" href="index.html">
+            <img src="assets/img/logo/lax-light.png" alt="LAX" style="height: 22px" />
+          </a>
+          <p class="text-muted" style="margin-top: var(--space-3); max-width: 32ch">
+            Assessoria de marketing sem nicho fixo — performance, branding, social media, conteúdo e tráfego pago em um só lugar.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <nav class="footer-links">
+            <a href="index.html">Início</a>
+            <a href="servicos.html">Serviços</a>
+            <a href="trabalhos.html">Trabalhos</a>
+            <a href="time.html">Time</a>
+            <a href="contato.html">Contato</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <h4>Redes</h4>
+          <nav class="footer-links">
+            <a href="https://instagram.com/laxa.mkt" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://linkedin.com/company/laxa" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://wa.me/5500000000000" target="_blank" rel="noopener">WhatsApp</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <nav class="footer-links">
+            <a href="mailto:contato@laxa.mkt">contato@laxa.mkt</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> LAX Assessoria de Marketing.</span>
+        <span>Uma cor por peça manda.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
