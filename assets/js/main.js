@@ -1,18 +1,17 @@
 /* =========================================================
    LAXA — main.js
-   Cursor custom, transição de página (pjax leve), marquee,
-   reveal on scroll, hero service switcher, formulário.
+   Landing page única: cursor custom, reveal on scroll,
+   switchers (hero / formatos), navegação por seção e
+   formulário de contato.
    ========================================================= */
 (function () {
   "use strict";
 
   var body = document.body;
-  var curtain = document.getElementById("curtain");
   var mainEl = document.getElementById("main");
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var revealObserver = null;
-  var panelObserver = null;
   var heroAutoplayTimer = null;
 
   /* -----------------------------------------------------
@@ -58,7 +57,7 @@
   }
 
   /* -----------------------------------------------------
-     Nav sólida ao rolar (evita colidir com o conteúdo)
+     Nav sólida ao rolar
      ----------------------------------------------------- */
   function initNavScroll() {
     var nav = document.querySelector(".site-nav");
@@ -103,20 +102,6 @@
   }
 
   /* -----------------------------------------------------
-     Nav active state
-     ----------------------------------------------------- */
-  function updateNavActive() {
-    var page = mainEl.dataset.page;
-    document.querySelectorAll(".nav-links a, .mobile-menu a, .nav-cta").forEach(function (link) {
-      if (link.dataset.page === page) {
-        link.setAttribute("aria-current", "page");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
-  }
-
-  /* -----------------------------------------------------
      Reveal on scroll
      ----------------------------------------------------- */
   function initReveal() {
@@ -145,7 +130,72 @@
   }
 
   /* -----------------------------------------------------
-     Hero service switcher (home)
+     Switcher genérico: chips flutuantes + painel de prévia
+     (usado pelo laboratório de formatos)
+     ----------------------------------------------------- */
+  function createSwitcher(root, opts) {
+    var chips = root.querySelectorAll(opts.chipSelector);
+    var panels = root.querySelectorAll(opts.panelSelector);
+    if (!chips.length || !panels.length) return null;
+
+    var current = 0;
+    var timer = null;
+
+    function activate(index) {
+      var chip = chips[index];
+      if (!chip) return;
+      current = index;
+      var key = chip.getAttribute(opts.chipKeyAttr);
+
+      chips.forEach(function (c) {
+        c.setAttribute("aria-pressed", "false");
+      });
+      chip.setAttribute("aria-pressed", "true");
+
+      panels.forEach(function (p) {
+        p.classList.toggle("is-active", p.getAttribute(opts.panelKeyAttr) === key);
+      });
+    }
+
+    function stop() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function start() {
+      if (prefersReducedMotion || chips.length < 2 || !opts.autoplayDelay) return;
+      stop();
+      timer = setInterval(function () {
+        activate((current + 1) % chips.length);
+      }, opts.autoplayDelay);
+    }
+
+    chips.forEach(function (chip, index) {
+      chip.addEventListener("mouseenter", function () {
+        stop();
+        activate(index);
+      });
+      chip.addEventListener("focus", function () {
+        stop();
+        activate(index);
+      });
+      chip.addEventListener("click", function () {
+        stop();
+        activate(index);
+      });
+    });
+
+    activate(0);
+    start();
+    root.addEventListener("mouseleave", start);
+
+    return { activate: activate, stop: stop, start: start };
+  }
+
+  /* -----------------------------------------------------
+     Hero: switcher de serviços (troca tema + paralaxe)
      ----------------------------------------------------- */
   function initHeroSwitcher() {
     var hero = mainEl.querySelector(".hero");
@@ -226,95 +276,18 @@
   }
 
   /* -----------------------------------------------------
-     Service panels (servicos.html) — invertem cor ao entrar em foco
+     Laboratório de formatos — chip + prévia
      ----------------------------------------------------- */
-  function initServicePanels() {
-    var panels = mainEl.querySelectorAll(".service-panel");
-    if (!panels.length) return;
-    if (panelObserver) panelObserver.disconnect();
-
-    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-      panels.forEach(function (p) {
-        p.classList.add("is-active");
-      });
-      return;
-    }
-
-    panelObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          entry.target.classList.toggle("is-active", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.45 }
-    );
-    panels.forEach(function (p) {
-      panelObserver.observe(p);
-    });
-  }
-
-  /* -----------------------------------------------------
-     Laboratório de formatos (cases.html) — chip + prévia
-     ----------------------------------------------------- */
-  var formatLabAutoplayTimer = null;
-
   function initFormatLab() {
     var lab = mainEl.querySelector(".format-lab");
     if (!lab) return;
-
-    var chips = lab.querySelectorAll(".format-chip");
-    var panels = lab.querySelectorAll(".format-preview-panel");
-    var current = 0;
-
-    function activate(index) {
-      var chip = chips[index];
-      if (!chip) return;
-      current = index;
-      var format = chip.dataset.format;
-
-      chips.forEach(function (c) {
-        c.setAttribute("aria-pressed", "false");
-      });
-      chip.setAttribute("aria-pressed", "true");
-
-      panels.forEach(function (p) {
-        p.classList.toggle("is-active", p.dataset.panel === format);
-      });
-    }
-
-    chips.forEach(function (chip, index) {
-      chip.addEventListener("mouseenter", function () {
-        stopAutoplay();
-        activate(index);
-      });
-      chip.addEventListener("focus", function () {
-        stopAutoplay();
-        activate(index);
-      });
-      chip.addEventListener("click", function () {
-        stopAutoplay();
-        activate(index);
-      });
+    createSwitcher(lab, {
+      chipSelector: ".format-chip",
+      panelSelector: ".format-preview-panel",
+      chipKeyAttr: "data-format",
+      panelKeyAttr: "data-panel",
+      autoplayDelay: 3200,
     });
-
-    function stopAutoplay() {
-      if (formatLabAutoplayTimer) {
-        clearInterval(formatLabAutoplayTimer);
-        formatLabAutoplayTimer = null;
-      }
-    }
-
-    function startAutoplay() {
-      if (prefersReducedMotion || chips.length < 2) return;
-      stopAutoplay();
-      formatLabAutoplayTimer = setInterval(function () {
-        activate((current + 1) % chips.length);
-      }, 3200);
-    }
-
-    activate(0);
-    startAutoplay();
-    lab.addEventListener("mouseleave", startAutoplay);
   }
 
   /* -----------------------------------------------------
@@ -350,115 +323,54 @@
   }
 
   /* -----------------------------------------------------
-     Inicialização por página
+     Navegação por seção: nav superior + dots laterais
+     + atalhos de teclado, pensados pra apresentar ao vivo
      ----------------------------------------------------- */
-  function scrollToTarget(rawUrl) {
-    var hash = "";
-    try {
-      hash = new URL(rawUrl, window.location.origin).hash;
-    } catch (e) {
-      hash = "";
-    }
-    var target = hash ? document.querySelector(hash) : null;
-    if (target) {
-      target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }
+  function initSectionNav() {
+    var sections = Array.prototype.slice.call(mainEl.querySelectorAll(".story-section[id]"));
+    if (!sections.length) return;
 
-  function initPage(targetUrl) {
-    updateNavActive();
-    initReveal();
-    initHeroSwitcher();
-    initServicePanels();
-    initFormatLab();
-    initContactForm();
-    scrollToTarget(targetUrl || window.location.href);
-  }
+    var trackedLinks = Array.prototype.slice.call(document.querySelectorAll("[data-section]"));
 
-  /* -----------------------------------------------------
-     Router leve (troca só o #main, com transição)
-     ----------------------------------------------------- */
-  var isAnimating = false;
-
-  function isRoutable(link) {
-    if (!link || !link.href) return false;
-    if (link.origin !== window.location.origin) return false;
-    if (link.target && link.target !== "" && link.target !== "_self") return false;
-    if (link.hasAttribute("download")) return false;
-    if (link.hash && link.pathname === window.location.pathname) return false;
-    if (/^(mailto:|tel:)/i.test(link.getAttribute("href") || "")) return false;
-    return true;
-  }
-
-  function navigateTo(url, push) {
-    if (isAnimating) return;
-    if (url === window.location.href && push) return;
-    isAnimating = true;
-
-    var duration = prefersReducedMotion ? 0 : 500;
-
-    function afterCover() {
-      fetch(url, { headers: { "X-Requested-With": "laxa-router" } })
-        .then(function (res) {
-          if (!res.ok) throw new Error("fetch failed");
-          return res.text();
-        })
-        .then(function (html) {
-          var doc = new DOMParser().parseFromString(html, "text/html");
-          var newMain = doc.getElementById("main");
-          if (!newMain) throw new Error("no #main in response");
-
-          document.title = doc.title;
-          mainEl.innerHTML = newMain.innerHTML;
-          mainEl.dataset.page = newMain.dataset.page || "";
-
-          if (push) {
-            window.history.pushState({}, "", url);
-          }
-
-          initPage(url);
-          reveal();
-        })
-        .catch(function () {
-          window.location.href = url;
-        });
+    function setActive(id) {
+      trackedLinks.forEach(function (link) {
+        if (link.dataset.section === id) {
+          link.setAttribute("aria-current", "true");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
     }
 
-    function reveal() {
-      if (!curtain || prefersReducedMotion) {
-        isAnimating = false;
-        return;
+    if (trackedLinks.length && "IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          });
+        },
+        { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+      );
+      sections.forEach(function (s) {
+        observer.observe(s);
+      });
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.target && /input|textarea/i.test(e.target.tagName)) return;
+      var activeLink = document.querySelector(".section-nav a[aria-current='true']");
+      var idx = activeLink ? sections.findIndex(function (s) { return s.id === activeLink.dataset.section; }) : 0;
+      if (idx < 0) idx = 0;
+
+      if (e.key === "ArrowDown" || e.key === "PageDown") {
+        e.preventDefault();
+        var next = sections[Math.min(idx + 1, sections.length - 1)];
+        next.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+      } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+        e.preventDefault();
+        var prev = sections[Math.max(idx - 1, 0)];
+        prev.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
       }
-      curtain.classList.remove("is-covering");
-      curtain.classList.add("is-revealing");
-      window.setTimeout(function () {
-        curtain.classList.remove("is-revealing");
-        isAnimating = false;
-      }, duration);
-    }
-
-    if (!curtain || prefersReducedMotion) {
-      afterCover();
-      return;
-    }
-
-    curtain.classList.add("is-covering");
-    window.setTimeout(afterCover, duration);
-  }
-
-  function initRouter() {
-    document.addEventListener("click", function (e) {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      var link = e.target.closest("a");
-      if (!isRoutable(link)) return;
-      e.preventDefault();
-      navigateTo(link.href, true);
-    });
-
-    window.addEventListener("popstate", function () {
-      navigateTo(window.location.href, false);
     });
   }
 
@@ -472,8 +384,12 @@
     initCursor();
     initNavScroll();
     initMobileMenu();
-    initRouter();
-    initPage();
+    initReveal();
+    initHeroSwitcher();
+    initFormatLab();
+    initContactForm();
+    initSectionNav();
+
     window.requestAnimationFrame(function () {
       body.classList.add("is-loaded");
     });

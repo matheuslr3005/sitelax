@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LAX — Assessoria de Marketing</title>
-  <meta name="description" content="LAX é uma assessoria de marketing completa: performance, branding, social media, criação de conteúdo e tráfego pago em um só time." />
+  <title>LAX — Assessoria de Marketing Completa</title>
+  <meta name="description" content="A LAX reúne performance, branding, social media, criação de conteúdo e tráfego pago num time só. Conheça quem somos, como trabalhamos e fale com a gente." />
   <link rel="icon" href="assets/img/logo/lax-color.png" type="image/png" />
   <link rel="stylesheet" href="assets/css/tokens.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -12,35 +12,45 @@
 <body>
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
-  <div class="curtain" id="curtain" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Pular para o conteúdo</a>
 
   <nav class="site-nav">
-    <a class="brand" href="index.html" aria-label="LAX — página inicial">
+    <a class="brand" href="#inicio" aria-label="LAX — topo da página">
       <img src="assets/img/logo/lax-color.png" alt="LAX" width="90" height="26" />
     </a>
     <ul class="nav-links">
-      <li><a href="index.html" data-page="home">Início</a></li>
-      <li><a href="servicos.html" data-page="servicos">Serviços</a></li>
-      <li><a href="cases.html" data-page="cases">Cases</a></li>
-      <li><a href="time.html" data-page="time">Time</a></li>
+      <li><a href="#quem-somos" data-section="quem-somos">Quem somos</a></li>
+      <li><a href="#servicos" data-section="servicos">O que fazemos</a></li>
+      <li><a href="#cases" data-section="cases">Cases</a></li>
+      <li><a href="#time" data-section="time">Time</a></li>
     </ul>
-    <a class="nav-cta" href="contato.html" data-page="contato">Vamos conversar</a>
+    <a class="nav-cta" href="#contato" data-section="contato">Vamos conversar</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" data-page="home">Início</a>
-    <a href="servicos.html" data-page="servicos">Serviços</a>
-    <a href="cases.html" data-page="cases">Cases</a>
-    <a href="time.html" data-page="time">Time</a>
-    <a href="contato.html" data-page="contato">Contato</a>
+    <a href="#inicio" data-section="inicio">Início</a>
+    <a href="#quem-somos" data-section="quem-somos">Quem somos</a>
+    <a href="#servicos" data-section="servicos">O que fazemos</a>
+    <a href="#cases" data-section="cases">Cases</a>
+    <a href="#time" data-section="time">Time</a>
+    <a href="#contato" data-section="contato">Contato</a>
   </div>
 
-  <main id="main" data-page="home">
-    <section class="hero theme-dark">
+  <nav class="section-nav" aria-label="Seções da página">
+    <a href="#inicio" data-section="inicio" aria-label="Início"><span></span></a>
+    <a href="#quem-somos" data-section="quem-somos" aria-label="Quem somos"><span></span></a>
+    <a href="#servicos" data-section="servicos" aria-label="O que fazemos"><span></span></a>
+    <a href="#metodo" data-section="metodo" aria-label="Como trabalhamos"><span></span></a>
+    <a href="#cases" data-section="cases" aria-label="Cases"><span></span></a>
+    <a href="#time" data-section="time" aria-label="Time"><span></span></a>
+    <a href="#contato" data-section="contato" aria-label="Contato"><span></span></a>
+  </nav>
+
+  <main id="main">
+    <section class="hero theme-dark story-section" id="inicio">
       <div class="hero-aurora" aria-hidden="true">
         <span class="blob blob-a"></span>
         <span class="blob blob-b"></span>
@@ -52,8 +62,8 @@
         <p class="hero-sub" data-reveal>Performance, branding, social media, conteúdo e tráfego pago, um time só, do diagnóstico ao resultado.</p>
 
         <div class="hero-actions" data-reveal>
-          <a class="btn" href="contato.html">Vamos conversar <span class="btn-arrow">↗</span></a>
-          <a class="btn btn-ghost" href="servicos.html">Ver serviços</a>
+          <a class="btn" href="#contato">Vamos conversar <span class="btn-arrow">↗</span></a>
+          <a class="btn btn-ghost" href="#servicos">Ver serviços</a>
         </div>
 
         <div class="service-grid" data-reveal>
@@ -76,123 +86,404 @@
       </div>
     </section>
 
-    <section class="section container">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">O que fazemos</p>
-        <h2>Sem departamentos isolados. Sem terceirizar pedaço nenhum da sua marca.</h2>
-      </div>
-      <div class="pillars-grid">
-        <a class="pillar-card" data-index="01" data-reveal href="servicos.html#performance">
-          <div>
-            <span class="pillar-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="4,38 16,26 26,32 44,10" stroke-linecap="square" stroke-linejoin="miter" />
-                <polyline points="34,10 44,10 44,20" stroke-linecap="square" stroke-linejoin="miter" />
-              </svg>
-            </span>
-            <h3>Performance</h3>
-            <p>Metas, funis e métricas guiando cada decisão, nada de achismo.</p>
-          </div>
-          <span class="card-link">Saiba mais ↗</span>
-        </a>
-        <a class="pillar-card" data-index="02" data-reveal href="servicos.html#branding">
-          <div>
-            <span class="pillar-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="10" y="10" width="20" height="20" transform="rotate(45 20 20)" />
-                <circle cx="30" cy="30" r="12" />
-              </svg>
-            </span>
-            <h3>Branding</h3>
-            <p>Identidade visual e verbal, posicionamento e uma marca que se reconhece de longe.</p>
-          </div>
-          <span class="card-link">Saiba mais ↗</span>
-        </a>
-        <a class="pillar-card" data-index="03" data-reveal href="servicos.html#social">
-          <div>
-            <span class="pillar-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="6" y="6" width="10" height="10" />
-                <rect x="19" y="6" width="10" height="10" />
-                <rect x="32" y="6" width="10" height="10" />
-                <rect x="6" y="19" width="10" height="10" />
-                <rect x="19" y="19" width="10" height="10" fill="currentColor" />
-                <rect x="32" y="19" width="10" height="10" />
-                <rect x="6" y="32" width="10" height="10" />
-                <rect x="19" y="32" width="10" height="10" />
-                <rect x="32" y="32" width="10" height="10" />
-              </svg>
-            </span>
-            <h3>Social Media</h3>
-            <p>Planejamento, calendário e gestão de redes com voz própria.</p>
-          </div>
-          <span class="card-link">Saiba mais ↗</span>
-        </a>
-        <a class="pillar-card" data-index="04" data-reveal href="servicos.html#conteudo">
-          <div>
-            <span class="pillar-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="6" y="6" width="36" height="36" />
-                <path d="M19 15 L34 24 L19 33 Z" fill="currentColor" stroke="none" />
-              </svg>
-            </span>
-            <h3>Criação de Conteúdo</h3>
-            <p>Peças, vídeos, artes e copy que sustentam a comunicação em qualquer canal.</p>
-          </div>
-          <span class="card-link">Saiba mais ↗</span>
-        </a>
-        <a class="pillar-card" data-index="05" data-reveal href="servicos.html#trafego">
-          <div>
-            <span class="pillar-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="20" cy="28" r="14" />
-                <circle cx="20" cy="28" r="5" />
-                <polyline points="26,22 42,6" stroke-linecap="square" />
-                <polyline points="32,6 42,6 42,16" stroke-linecap="square" />
-              </svg>
-            </span>
-            <h3>Tráfego Pago</h3>
-            <p>Mídia paga, segmentação e otimização contínua de investimento.</p>
-          </div>
-          <span class="card-link">Saiba mais ↗</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="section container">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">Como trabalhamos</p>
-        <h2>Um método, não uma lista de tarefas soltas.</h2>
-      </div>
-      <div class="process-list">
-        <div class="process-step" data-reveal>
-          <p class="index">01</p>
-          <h3>Diagnóstico</h3>
-          <p>Entendemos a marca, o momento e onde o marketing está travando o crescimento.</p>
-        </div>
-        <div class="process-step" data-reveal>
-          <p class="index">02</p>
-          <h3>Estratégia</h3>
-          <p>Definimos prioridades, canais e metas, sem empacotar solução genérica.</p>
-        </div>
-        <div class="process-step" data-reveal>
-          <p class="index">03</p>
-          <h3>Execução</h3>
-          <p>Colocamos performance, branding, social e conteúdo pra rodar juntos.</p>
-        </div>
-        <div class="process-step" data-reveal>
-          <p class="index">04</p>
-          <h3>Otimização</h3>
-          <p>Medimos, ajustamos e voltamos pro diagnóstico. Sempre.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-band">
+    <section class="story-section" id="quem-somos">
       <div class="container">
-        <p class="eyebrow" data-reveal>Bora conversar</p>
-        <h2 data-reveal>Vamos construir<br />sua marca?</h2>
-        <a class="btn" data-reveal href="contato.html">Fale com a gente <span class="btn-arrow">↗</span></a>
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Quem somos</p>
+          <h2>Marketing completo não devia significar um monte de fornecedor solto.</h2>
+        </div>
+        <div class="about-grid">
+          <p class="about-lead" data-reveal>A LAX nasceu pra resolver isso: reunir estratégia, criação e mídia num time só, que conhece a marca de perto e responde por tudo o que entrega, do diagnóstico ao resultado.</p>
+          <ul class="value-list" data-reveal>
+            <li><span class="value-mark">01</span>Tudo internalizado, nada repassado pra quem não conhece o projeto.</li>
+            <li><span class="value-mark">02</span>Sem pacote fechado, o escopo é montado pra cada marca.</li>
+            <li><span class="value-mark">03</span>Adaptamos a estratégia pra qualquer setor, sem abrir mão do padrão de entrega.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section" id="servicos">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">O que fazemos</p>
+          <h2>Sem departamentos isolados. Sem terceirizar pedaço nenhum da sua marca.</h2>
+        </div>
+        <div class="pillars-grid">
+          <div class="pillar-card" data-index="01" data-reveal>
+            <div>
+              <span class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="4,38 16,26 26,32 44,10" stroke-linecap="square" stroke-linejoin="miter" />
+                  <polyline points="34,10 44,10 44,20" stroke-linecap="square" stroke-linejoin="miter" />
+                </svg>
+              </span>
+              <h3>Performance</h3>
+              <p>Metas, funis e métricas guiando cada decisão, nada de achismo.</p>
+              <ul class="pillar-list">
+                <li>Metas e KPIs claros</li>
+                <li>Funil mapeado e testado</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pillar-card" data-index="02" data-reveal>
+            <div>
+              <span class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="10" y="10" width="20" height="20" transform="rotate(45 20 20)" />
+                  <circle cx="30" cy="30" r="12" />
+                </svg>
+              </span>
+              <h3>Branding</h3>
+              <p>Identidade visual e verbal, posicionamento e uma marca que se reconhece de longe.</p>
+              <ul class="pillar-list">
+                <li>Identidade visual e verbal</li>
+                <li>Posicionamento e naming</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pillar-card" data-index="03" data-reveal>
+            <div>
+              <span class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="6" y="6" width="10" height="10" />
+                  <rect x="19" y="6" width="10" height="10" />
+                  <rect x="32" y="6" width="10" height="10" />
+                  <rect x="6" y="19" width="10" height="10" />
+                  <rect x="19" y="19" width="10" height="10" fill="currentColor" />
+                  <rect x="32" y="19" width="10" height="10" />
+                  <rect x="6" y="32" width="10" height="10" />
+                  <rect x="19" y="32" width="10" height="10" />
+                  <rect x="32" y="32" width="10" height="10" />
+                </svg>
+              </span>
+              <h3>Social Media</h3>
+              <p>Planejamento, calendário e gestão de redes com voz própria.</p>
+              <ul class="pillar-list">
+                <li>Calendário e gestão de comunidade</li>
+                <li>Pauta e métricas sociais</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pillar-card" data-index="04" data-reveal>
+            <div>
+              <span class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="6" y="6" width="36" height="36" />
+                  <path d="M19 15 L34 24 L19 33 Z" fill="currentColor" stroke="none" />
+                </svg>
+              </span>
+              <h3>Criação de Conteúdo</h3>
+              <p>Peças, vídeos, artes e copy que sustentam a comunicação em qualquer canal.</p>
+              <ul class="pillar-list">
+                <li>Direção de arte e vídeo</li>
+                <li>Copywriting</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pillar-card" data-index="05" data-reveal>
+            <div>
+              <span class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="20" cy="28" r="14" />
+                  <circle cx="20" cy="28" r="5" />
+                  <polyline points="26,22 42,6" stroke-linecap="square" />
+                  <polyline points="32,6 42,6 42,16" stroke-linecap="square" />
+                </svg>
+              </span>
+              <h3>Tráfego Pago</h3>
+              <p>Mídia paga, segmentação e otimização contínua de investimento.</p>
+              <ul class="pillar-list">
+                <li>Meta Ads e Google Ads</li>
+                <li>Segmentação e otimização contínua</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section" id="metodo">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Como trabalhamos</p>
+          <h2>Um método, não uma lista de tarefas soltas.</h2>
+        </div>
+        <div class="process-list">
+          <div class="process-step" data-reveal>
+            <p class="index">01</p>
+            <h3>Diagnóstico</h3>
+            <p>Entendemos a marca, o momento e onde o marketing está travando o crescimento.</p>
+          </div>
+          <div class="process-step" data-reveal>
+            <p class="index">02</p>
+            <h3>Estratégia</h3>
+            <p>Definimos prioridades, canais e metas, sem empacotar solução genérica.</p>
+          </div>
+          <div class="process-step" data-reveal>
+            <p class="index">03</p>
+            <h3>Execução</h3>
+            <p>Colocamos performance, branding, social e conteúdo pra rodar juntos.</p>
+          </div>
+          <div class="process-step" data-reveal>
+            <p class="index">04</p>
+            <h3>Otimização</h3>
+            <p>Medimos, ajustamos e voltamos pro diagnóstico. Sempre.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section" id="cases">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Cases</p>
+          <h2>Resultado em cada formato que produzimos.</h2>
+          <p>Enquanto reunimos os primeiros cases publicados, veja abaixo os formatos que já dominamos, do vídeo à campanha de tráfego.</p>
+        </div>
+
+        <div class="empty-state">
+          <div class="empty-slot" data-reveal>
+            <p class="index">01</p>
+            <p>Case em produção</p>
+          </div>
+          <div class="empty-slot" data-reveal>
+            <p class="index">02</p>
+            <p>Case em produção</p>
+          </div>
+          <div class="empty-slot" data-reveal>
+            <p class="index">03</p>
+            <p>Case em produção</p>
+          </div>
+        </div>
+
+        <div class="story-block">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">Formatos</p>
+            <h2>Passe o mouse e veja em ação.</h2>
+          </div>
+
+          <div class="format-lab" data-reveal>
+            <div class="format-chips">
+              <button type="button" class="format-chip" data-format="video" style="--delay: 0s" aria-pressed="true">Vídeo</button>
+              <button type="button" class="format-chip" data-format="social" style="--delay: 0.3s" aria-pressed="false">Social Media</button>
+              <button type="button" class="format-chip" data-format="landing" style="--delay: 0.6s" aria-pressed="false">Landing Page</button>
+              <button type="button" class="format-chip" data-format="identidade" style="--delay: 0.9s" aria-pressed="false">Identidade Visual</button>
+              <button type="button" class="format-chip" data-format="trafego" style="--delay: 1.2s" aria-pressed="false">Campanha de Tráfego</button>
+              <button type="button" class="format-chip" data-format="foto" style="--delay: 1.5s" aria-pressed="false">Fotografia de Produto</button>
+              <button type="button" class="format-chip" data-format="branding" style="--delay: 1.8s" aria-pressed="false">Branding</button>
+              <button type="button" class="format-chip" data-format="copy" style="--delay: 2.1s" aria-pressed="false">Roteiro &amp; Copy</button>
+              <button type="button" class="format-chip" data-format="email" style="--delay: 2.4s" aria-pressed="false">E-mail Marketing</button>
+              <button type="button" class="format-chip" data-format="anuncio" style="--delay: 2.7s" aria-pressed="false">Design de Anúncio</button>
+            </div>
+
+            <div class="format-preview">
+              <div class="format-preview-panel is-active" data-panel="video">
+                <img src="assets/img/formats/video.jpg" alt="Pessoa gravando um vídeo com celular em tripé e ring light" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>Vídeo</h4>
+                  <p>Peças em vídeo prontas pra qualquer feed, do teaser ao anúncio.</p>
+                  <span class="progress-track"><span class="progress-fill"></span></span>
+                </div>
+              </div>
+              <div class="format-preview-panel" data-panel="social">
+                <img src="assets/img/formats/social.jpg" alt="Pessoa gerenciando redes sociais no celular e no notebook" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>Social Media</h4>
+                  <p>Grade, stories e legendas com a mesma voz em todo canal.</p>
+                </div>
+              </div>
+              <div class="format-preview-panel" data-panel="landing">
+                <img src="assets/img/formats/landing.jpg" alt="Mãos digitando com uma landing page aberta na tela do notebook" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>Landing Page</h4>
+                  <p>Página feita pra converter tráfego de campanha em contato.</p>
+                </div>
+              </div>
+              <div class="format-preview-panel" data-panel="identidade">
+                <img src="assets/img/formats/identidade.jpg" alt="Mesa de design com paleta de cores, sketchbook de logo e cartela pantone" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>Identidade Visual</h4>
+                  <p>Paleta, tipografia e sistema gráfico que sustentam a marca.</p>
+                </div>
+              </div>
+              <div class="format-preview-panel" data-panel="trafego">
+                <img src="assets/img/formats/trafego.jpg" alt="Tela mostrando dashboard de métricas de campanha de tráfego" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>Campanha de Tráfego</h4>
+                  <p>Segmentação e mídia paga apontadas pro objetivo certo.</p>
+                </div>
+              </div>
+              <div class="format-preview-panel" data-panel="foto">
+                <img src="assets/img/formats/foto.jpg" alt="Fotógrafo montando iluminação de estúdio pra fotografar um produto" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>Fotografia de Produto</h4>
+                  <p>Imagem de catálogo com luz e composição consistentes.</p>
+                </div>
+              </div>
+              <div class="format-preview-panel" data-panel="branding">
+                <img src="assets/img/formats/branding.jpg" alt="Materiais de identidade de marca: cartões, caderno e amostras" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>Branding</h4>
+                  <p>Posicionamento e discurso por trás de cada peça que sai.</p>
+                </div>
+              </div>
+              <div class="format-preview-panel" data-panel="copy">
+                <img src="assets/img/formats/copy.jpg" alt="Pessoa escrevendo roteiro à mão ao lado de um notebook" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>Roteiro &amp; Copy</h4>
+                  <p>Texto que carrega a estratégia em qualquer formato.</p>
+                </div>
+              </div>
+              <div class="format-preview-panel" data-panel="email">
+                <img src="assets/img/formats/email.jpg" alt="Tela de notebook mostrando um template de e-mail marketing sendo criado" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>E-mail Marketing</h4>
+                  <p>Fluxos e disparos que mantêm a base aquecida.</p>
+                </div>
+              </div>
+              <div class="format-preview-panel" data-panel="anuncio">
+                <img src="assets/img/formats/anuncio.jpg" alt="Designer criando uma peça de anúncio em um monitor grande" loading="lazy" />
+                <div class="format-preview-caption">
+                  <h4>Design de Anúncio</h4>
+                  <p>Arte estática pensada pra performar em campanha.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-block">
+          <p class="shimmer-statement" data-reveal>Cada projeto começa do zero, sem fórmula pronta.</p>
+        </div>
+
+        <div class="story-block">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">Onde já atuamos</p>
+            <h2>Adaptamos a estratégia a cada setor, sem abrir mão do padrão de entrega.</h2>
+          </div>
+          <div class="tag-cloud tag-cloud--float" data-reveal>
+            <span style="--delay: 0s">E-commerce</span>
+            <span style="--delay: 0.4s">Serviços</span>
+            <span style="--delay: 0.8s">Saúde e bem-estar</span>
+            <span style="--delay: 1.2s">Educação</span>
+            <span style="--delay: 1.6s">Moda</span>
+            <span style="--delay: 2s">Alimentação</span>
+            <span style="--delay: 2.4s">Tecnologia</span>
+            <span style="--delay: 2.8s">Eventos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section" id="time">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Time</p>
+          <h2>Um time preparado pra cuidar de cada frente.</h2>
+          <p>Preferimos manter tudo em casa: nada de repassar a sua marca pra quem não conhece o projeto. Ainda não usamos fotos por aqui, o time aparece pelo que entrega.</p>
+        </div>
+        <div class="role-grid">
+          <div class="role-card" data-reveal>
+            <span class="role-mark" aria-hidden="true">E</span>
+            <div class="role-card-inner">
+              <h3>Estratégia</h3>
+              <p>Define prioridades, metas e o caminho entre onde a marca está e onde ela quer chegar.</p>
+            </div>
+          </div>
+          <div class="role-card" data-reveal>
+            <span class="role-mark" aria-hidden="true">C</span>
+            <div class="role-card-inner">
+              <h3>Criação</h3>
+              <p>Dá corpo às ideias: direção de arte, design e produção de conteúdo.</p>
+            </div>
+          </div>
+          <div class="role-card" data-reveal>
+            <span class="role-mark" aria-hidden="true">S</span>
+            <div class="role-card-inner">
+              <h3>Social Media</h3>
+              <p>Cuida do dia a dia das redes, do calendário à conversa com a comunidade.</p>
+            </div>
+          </div>
+          <div class="role-card" data-reveal>
+            <span class="role-mark" aria-hidden="true">P</span>
+            <div class="role-card-inner">
+              <h3>Performance &amp; Mídia</h3>
+              <p>Toca tráfego pago, métricas e otimização contínua de investimento.</p>
+            </div>
+          </div>
+          <div class="role-card" data-reveal>
+            <span class="role-mark" aria-hidden="true">A</span>
+            <div class="role-card-inner">
+              <h3>Atendimento</h3>
+              <p>Traduz a estratégia pro cliente e o cliente pra estratégia.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section" id="contato">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Contato</p>
+          <h2>Vamos conversar?</h2>
+          <p>Conta um pouco sobre o momento da sua marca e o que você precisa. A gente responde em breve.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div data-reveal>
+            <form name="contato" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm">
+              <input type="hidden" name="form-name" value="contato" />
+              <p class="hp-field">
+                <label>Não preencha este campo: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+              </p>
+
+              <div class="field">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" placeholder="Seu nome" required />
+              </div>
+
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="voce@empresa.com" required />
+              </div>
+
+              <div class="field">
+                <label for="company">Empresa</label>
+                <input type="text" id="company" name="company" placeholder="Nome da empresa" />
+              </div>
+
+              <div class="field">
+                <label for="message">Mensagem</label>
+                <textarea id="message" name="message" placeholder="Conta um pouco sobre o projeto" required></textarea>
+              </div>
+
+              <button type="submit" class="btn">Enviar mensagem <span class="btn-arrow">↗</span></button>
+              <p class="form-note">Ao enviar, você concorda em ser contatado pela LAX.</p>
+            </form>
+            <div class="form-success" id="formSuccess">
+              <p>Mensagem enviada! A gente responde em breve.</p>
+            </div>
+          </div>
+
+          <div class="contact-info" data-reveal>
+            <dl>
+              <div class="info-item">
+                <dt>E-mail</dt>
+                <dd><a href="mailto:laxassessoria@outlook.com">laxassessoria@outlook.com</a></dd>
+              </div>
+              <div class="info-item">
+                <dt>WhatsApp</dt>
+                <dd><a class="icon-link" href="https://wa.me/5551991990892" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20l1.3-4.3A8 8 0 1 1 8.7 19L4 20Z"/></svg>Chamar no WhatsApp</a></dd>
+              </div>
+            </dl>
+            <div class="social-row">
+              <a class="icon-link" href="https://www.instagram.com/laxassessoria/" target="_blank" rel="noopener">Instagram</a>
+              <a href="https://linkedin.com/company/laxa" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -201,7 +492,7 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-col">
-          <a class="brand" href="index.html">
+          <a class="brand" href="#inicio">
             <img src="assets/img/logo/lax-light.png" alt="LAX" style="height: 22px" />
           </a>
           <p class="text-muted" style="margin-top: var(--space-3); max-width: 32ch">
@@ -211,11 +502,12 @@
         <div class="footer-col">
           <h4>Navegação</h4>
           <nav class="footer-links">
-            <a href="index.html">Início</a>
-            <a href="servicos.html">Serviços</a>
-            <a href="cases.html">Cases</a>
-            <a href="time.html">Time</a>
-            <a href="contato.html">Contato</a>
+            <a href="#inicio">Início</a>
+            <a href="#quem-somos">Quem somos</a>
+            <a href="#servicos">O que fazemos</a>
+            <a href="#cases">Cases</a>
+            <a href="#time">Time</a>
+            <a href="#contato">Contato</a>
           </nav>
         </div>
         <div class="footer-col">
