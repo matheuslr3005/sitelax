@@ -355,6 +355,51 @@
   }
 
   /* -----------------------------------------------------
+     Globo Brasil ⇄ Europa (Quem somos)
+     Meridianos em SVG "giram" conforme a posição de scroll,
+     truque clássico de achatar/expandir elipses pra simular
+     uma esfera girando sem precisar de WebGL.
+     ----------------------------------------------------- */
+  function initGlobe() {
+    var wrap = mainEl.querySelector(".globe-wrap");
+    if (!wrap || prefersReducedMotion) return;
+
+    var meridians = Array.prototype.slice.call(wrap.querySelectorAll(".globe-meridian"));
+    if (!meridians.length) return;
+
+    var R = 88;
+    var ticking = false;
+
+    function update() {
+      var rect = wrap.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = 1 - Math.max(0, Math.min(1, (rect.top + rect.height / 2) / vh));
+      var t = progress * Math.PI * 2.4;
+
+      meridians.forEach(function (el) {
+        var phase = parseFloat(el.dataset.phase) || 0;
+        var c = Math.cos(phase + t);
+        var rx = Math.max(2, Math.abs(R * c));
+        el.setAttribute("rx", rx.toFixed(1));
+        el.style.opacity = c > 0 ? (0.25 + 0.45 * c).toFixed(2) : (0.08 + 0.12 * (1 + c)).toFixed(2);
+      });
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  }
+
+  /* -----------------------------------------------------
      Formulário de contato (Netlify Forms via fetch)
      ----------------------------------------------------- */
   function initContactForm() {
@@ -454,6 +499,7 @@
     initContactForm();
     initSectionNav();
     initScrollFX();
+    initGlobe();
 
     window.requestAnimationFrame(function () {
       body.classList.add("is-loaded");
