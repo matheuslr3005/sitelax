@@ -15,41 +15,6 @@
   var heroAutoplayTimer = null;
 
   /* -----------------------------------------------------
-     Portal de entrada: mãos espelhadas + botão de play
-     ----------------------------------------------------- */
-  function initIntroGate() {
-    var gate = document.getElementById("introGate");
-    if (!gate) return;
-
-    if (prefersReducedMotion) {
-      gate.remove();
-      return;
-    }
-
-    var playBtn = document.getElementById("introPlay");
-    body.classList.add("intro-locked");
-
-    window.setTimeout(function () {
-      gate.classList.add("is-ready");
-      if (playBtn) playBtn.focus();
-    }, 300);
-
-    var dismissed = false;
-    function dismiss() {
-      if (dismissed) return;
-      dismissed = true;
-      gate.classList.add("is-hidden");
-      body.classList.remove("intro-locked");
-      window.setTimeout(function () {
-        gate.remove();
-      }, 650);
-    }
-
-    if (playBtn) playBtn.addEventListener("click", dismiss);
-    window.setTimeout(dismiss, 7000);
-  }
-
-  /* -----------------------------------------------------
      Custom cursor
      ----------------------------------------------------- */
   function initCursor() {
@@ -571,7 +536,6 @@
     var yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    initIntroGate();
     initCursor();
     initNavScroll();
     initMobileMenu();
