@@ -823,21 +823,28 @@ body.has-fine-pointer .cursor-ring {
 }
 
 /* ---------------------------------------------------------
-   Globo Brasil ⇄ Europa (Quem somos)
+   Globo Brasil ⇄ Europa (Quem somos) — cenário de fundo
    --------------------------------------------------------- */
-.globe-row {
-  margin-top: var(--space-7);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-  text-align: center;
+#quem-somos {
+  position: relative;
+  overflow: hidden;
+}
+
+#quem-somos .container {
+  position: relative;
+  z-index: 1;
 }
 
 .globe-wrap {
-  position: relative;
-  width: 220px;
-  height: 220px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(78vw, 980px);
+  height: min(78vw, 980px);
+  opacity: 0.28;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .globe-sphere,
@@ -848,34 +855,30 @@ body.has-fine-pointer .cursor-ring {
   height: 100%;
 }
 
-.globe-arc {
-  pointer-events: none;
-}
-
 .globe-outline {
   fill: none;
   stroke: var(--color-hairline);
-  stroke-width: 1.5;
+  stroke-width: 1;
 }
 
 .globe-lat {
   fill: none;
   stroke: var(--color-hairline);
-  stroke-width: 1;
+  stroke-width: 0.75;
   opacity: 0.45;
 }
 
 .globe-meridian {
   fill: none;
   stroke: var(--color-brand-red);
-  stroke-width: 1;
+  stroke-width: 0.75;
   opacity: 0.3;
 }
 
 .globe-arc path {
   fill: none;
   stroke: var(--color-brand-red);
-  stroke-width: 1.5;
+  stroke-width: 1;
   stroke-dasharray: 4 5;
   opacity: 0.65;
   animation: globe-arc-flow 2.2s linear infinite;
@@ -908,12 +911,6 @@ body.has-fine-pointer .cursor-ring {
   border-radius: 50%;
   background: var(--color-brand-red);
   box-shadow: 0 0 0 4px rgba(196, 39, 44, 0.18);
-}
-
-.globe-caption {
-  color: var(--color-ink-muted);
-  font-size: var(--fs-caption);
-  max-width: 34ch;
 }
 
 @media (prefers-reduced-motion: reduce) {
