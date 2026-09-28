@@ -147,23 +147,15 @@
   /* -----------------------------------------------------
      Hero service switcher (home)
      ----------------------------------------------------- */
-  function restartAnimation(el, className) {
-    el.classList.remove(className);
-    void el.offsetWidth;
-    el.classList.add(className);
-  }
-
   function initHeroSwitcher() {
     var hero = mainEl.querySelector(".hero");
     if (!hero) return;
 
-    var bgWord = hero.querySelector(".hero-bg-word");
-    var sweep = hero.querySelector(".hero-sweep");
+    var aurora = hero.querySelector(".hero-aurora");
     var buttons = hero.querySelectorAll(".service-switcher button");
     var current = 0;
 
-    function activate(index, opts) {
-      opts = opts || {};
+    function activate(index) {
       var btn = buttons[index];
       if (!btn) return;
       current = index;
@@ -173,18 +165,9 @@
       });
       btn.setAttribute("aria-pressed", "true");
 
-      if (bgWord && bgWord.textContent !== btn.dataset.word) {
-        bgWord.textContent = btn.dataset.word;
-        if (!prefersReducedMotion) restartAnimation(bgWord, "is-swapping");
-      }
-
       var theme = btn.dataset.theme === "wine" ? "wine" : "dark";
       hero.classList.toggle("theme-wine", theme === "wine");
       hero.classList.toggle("theme-dark", theme !== "wine");
-
-      if (sweep && !prefersReducedMotion && !opts.silent) {
-        restartAnimation(sweep, "is-sweeping");
-      }
     }
 
     buttons.forEach(function (btn, index) {
@@ -217,28 +200,26 @@
       }, 4200);
     }
 
-    activate(0, { silent: true });
+    activate(0);
     startAutoplay();
 
     hero.addEventListener("mouseleave", startAutoplay);
 
-    /* leve parallax do texto de fundo conforme o cursor */
-    if (window.matchMedia("(pointer: fine)").matches && !prefersReducedMotion) {
+    /* leve paralaxe do fundo (auroras) conforme o cursor */
+    if (aurora && window.matchMedia("(pointer: fine)").matches && !prefersReducedMotion) {
       var px = 0;
       var py = 0;
       var tx = 0;
       var ty = 0;
       hero.addEventListener("mousemove", function (e) {
         var rect = hero.getBoundingClientRect();
-        px = ((e.clientX - rect.left) / rect.width - 0.5) * 24;
-        py = ((e.clientY - rect.top) / rect.height - 0.5) * 24;
+        px = (e.clientX - rect.left) / rect.width - 0.5;
+        py = (e.clientY - rect.top) / rect.height - 0.5;
       });
       (function parallaxLoop() {
-        tx += (px - tx) * 0.06;
-        ty += (py - ty) * 0.06;
-        if (bgWord) {
-          bgWord.style.transform = "translate(calc(-50% + " + tx + "px), calc(-50% + " + ty + "px))";
-        }
+        tx += (px - tx) * 0.04;
+        ty += (py - ty) * 0.04;
+        aurora.style.transform = "translate(" + tx * 30 + "px, " + ty * 20 + "px)";
         requestAnimationFrame(parallaxLoop);
       })();
     }
@@ -322,20 +303,10 @@
     }
   }
 
-  function initHero3D() {
-    if (!window.LaxHero3D) return;
-    if (mainEl.querySelector("#heroObject")) {
-      window.LaxHero3D.mount();
-    } else {
-      window.LaxHero3D.unmount();
-    }
-  }
-
   function initPage(targetUrl) {
     updateNavActive();
     initReveal();
     initHeroSwitcher();
-    initHero3D();
     initServicePanels();
     initContactForm();
     scrollToTarget(targetUrl || window.location.href);

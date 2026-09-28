@@ -491,78 +491,104 @@ body.has-fine-pointer .cursor-ring {
   background: var(--color-brand-wine);
 }
 
-.hero-sweep {
+.hero-aurora {
   position: absolute;
   inset: 0;
-  background: var(--color-brand-red);
-  opacity: 0.5;
-  transform: translateX(-105%) skewX(-8deg);
   z-index: 0;
+  overflow: hidden;
   pointer-events: none;
 }
 
-.hero-sweep.is-sweeping {
-  animation: sweep var(--dur-mid) var(--ease-in-out);
+.hero-aurora .blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
 }
 
-@keyframes sweep {
+.hero-aurora .blob-a {
+  top: -10%;
+  left: 8%;
+  width: 46vw;
+  height: 46vw;
+  max-width: 620px;
+  max-height: 620px;
+  background: radial-gradient(circle, var(--color-brand-red), transparent 70%);
+  animation: aurora-a 22s var(--ease-in-out) infinite alternate;
+}
+
+.hero-aurora .blob-b {
+  bottom: -18%;
+  right: 4%;
+  width: 38vw;
+  height: 38vw;
+  max-width: 520px;
+  max-height: 520px;
+  background: radial-gradient(circle, var(--color-brand-wine), transparent 72%);
+  animation: aurora-b 26s var(--ease-in-out) infinite alternate;
+}
+
+.hero-aurora .blob-c {
+  top: 30%;
+  right: 24%;
+  width: 22vw;
+  height: 22vw;
+  max-width: 320px;
+  max-height: 320px;
+  background: radial-gradient(circle, var(--color-accent-sand), transparent 74%);
+  opacity: 0.16;
+  animation: aurora-c 19s var(--ease-in-out) infinite alternate;
+}
+
+.hero.theme-wine .hero-aurora .blob {
+  opacity: 0.32;
+}
+
+@keyframes aurora-a {
   from {
-    transform: translateX(-105%) skewX(-8deg);
+    transform: translate(0, 0) scale(1);
   }
   to {
-    transform: translateX(105%) skewX(-8deg);
+    transform: translate(6%, 8%) scale(1.12);
   }
 }
 
-.hero-bg-word {
+@keyframes aurora-b {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-8%, -6%) scale(1.08);
+  }
+}
+
+@keyframes aurora-c {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-10%, 10%) scale(0.92);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora .blob {
+    animation: none;
+  }
+}
+
+.hero-grid {
   position: absolute;
-  left: 50%;
-  top: 52%;
-  transform: translate(-50%, -50%);
+  inset: 0;
   z-index: 0;
-  width: 100%;
-  text-align: center;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(4rem, 4rem + 12vw, 13rem);
-  line-height: 0.85;
-  letter-spacing: var(--tracking-display);
-  color: var(--color-ink);
-  opacity: 0.08;
-  white-space: nowrap;
   pointer-events: none;
-  transition: opacity var(--dur-mid) var(--ease-out);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-}
-
-.hero.theme-wine .hero-bg-word {
-  opacity: 0.14;
-}
-
-@media (max-width: 640px) {
-  .hero-bg-word {
-    top: 60%;
-    font-size: clamp(2.75rem, 2.5rem + 13vw, 5.5rem);
-  }
-}
-
-.hero-bg-word.is-swapping {
-  animation: bgword-swap var(--dur-mid) var(--ease-out);
-}
-
-@keyframes bgword-swap {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.94);
-  }
-  60% {
-    opacity: 0.16;
-  }
-  100% {
-    opacity: 0.08;
-    transform: translate(-50%, -50%) scale(1);
-  }
+  opacity: 0.5;
+  background-image: linear-gradient(to right, var(--color-hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-hairline) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 78%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 78%);
 }
 
 .hero-inner {
@@ -570,43 +596,17 @@ body.has-fine-pointer .cursor-ring {
   z-index: 1;
 }
 
-.hero-object {
-  display: none;
-  position: absolute;
-  top: 8%;
-  right: 4%;
-  z-index: 1;
-  width: clamp(220px, 24vw, 360px);
-  aspect-ratio: 1;
-  pointer-events: none;
-}
-
-.hero-object::before {
-  content: "";
-  position: absolute;
-  inset: 10%;
-  z-index: -1;
-  background: radial-gradient(circle, rgba(196, 39, 44, 0.35), transparent 70%);
-  filter: blur(20px);
-}
-
-.hero-object canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-@media (min-width: 901px) {
-  .hero-object {
-    display: block;
-  }
-}
-
 .hero-heading {
-  max-width: 20ch;
+  max-width: 17ch;
   font-size: var(--fs-display-lg);
   line-height: var(--lh-display-lg);
-  margin-top: var(--space-3);
+}
+
+.hero-sub {
+  margin-top: var(--space-4);
+  max-width: 46ch;
+  font-size: var(--fs-body-lg);
+  color: var(--color-ink-muted);
 }
 
 .hero-heading em {
