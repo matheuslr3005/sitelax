@@ -743,16 +743,28 @@ body.has-fine-pointer .cursor-ring {
   transform: perspective(1200px) translateY(0) rotateX(0deg);
 }
 
+/* variante "aba abrindo": usada nos cards em grid (serviços, time, cases) */
+[data-reveal][data-flap] {
+  transform: perspective(1400px) rotateY(-62deg) translateX(-16px);
+  transform-origin: left center;
+  transition-delay: var(--delay, 0s);
+}
+
+[data-reveal][data-flap].is-visible {
+  transform: perspective(1400px) rotateY(0deg) translateX(0);
+}
+
 [data-tilt],
 [data-parallax] {
   will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  [data-reveal],
+  [data-reveal][data-flap] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
   [data-tilt],
