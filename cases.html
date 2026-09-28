@@ -62,38 +62,122 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-head container" data-reveal>
+    <section class="section container">
+      <div class="section-head" data-reveal>
         <p class="eyebrow">Formatos</p>
-        <h2>O que já sabemos produzir.</h2>
+        <h2>Passe o mouse e veja em ação.</h2>
       </div>
-      <div class="format-wall" data-reveal>
-        <div class="format-row format-row--left">
-          <div class="format-track">
-            <span class="format-card"><span class="index">01</span><span class="label">Vídeo</span></span>
-            <span class="format-card"><span class="index">02</span><span class="label">Social Media</span></span>
-            <span class="format-card"><span class="index">03</span><span class="label">Landing Page</span></span>
-            <span class="format-card"><span class="index">04</span><span class="label">Identidade Visual</span></span>
-            <span class="format-card"><span class="index">05</span><span class="label">Campanha de Tráfego</span></span>
-            <span class="format-card"><span class="index">01</span><span class="label">Vídeo</span></span>
-            <span class="format-card"><span class="index">02</span><span class="label">Social Media</span></span>
-            <span class="format-card"><span class="index">03</span><span class="label">Landing Page</span></span>
-            <span class="format-card"><span class="index">04</span><span class="label">Identidade Visual</span></span>
-            <span class="format-card"><span class="index">05</span><span class="label">Campanha de Tráfego</span></span>
-          </div>
+
+      <div class="format-lab" data-reveal>
+        <div class="format-chips">
+          <button type="button" class="format-chip" data-format="video" style="--delay: 0s" aria-pressed="true">Vídeo</button>
+          <button type="button" class="format-chip" data-format="social" style="--delay: 0.3s" aria-pressed="false">Social Media</button>
+          <button type="button" class="format-chip" data-format="landing" style="--delay: 0.6s" aria-pressed="false">Landing Page</button>
+          <button type="button" class="format-chip" data-format="identidade" style="--delay: 0.9s" aria-pressed="false">Identidade Visual</button>
+          <button type="button" class="format-chip" data-format="trafego" style="--delay: 1.2s" aria-pressed="false">Campanha de Tráfego</button>
+          <button type="button" class="format-chip" data-format="foto" style="--delay: 1.5s" aria-pressed="false">Fotografia de Produto</button>
+          <button type="button" class="format-chip" data-format="branding" style="--delay: 1.8s" aria-pressed="false">Branding</button>
+          <button type="button" class="format-chip" data-format="copy" style="--delay: 2.1s" aria-pressed="false">Roteiro &amp; Copy</button>
+          <button type="button" class="format-chip" data-format="email" style="--delay: 2.4s" aria-pressed="false">E-mail Marketing</button>
+          <button type="button" class="format-chip" data-format="anuncio" style="--delay: 2.7s" aria-pressed="false">Design de Anúncio</button>
         </div>
-        <div class="format-row format-row--right">
-          <div class="format-track">
-            <span class="format-card"><span class="index">06</span><span class="label">Fotografia de Produto</span></span>
-            <span class="format-card"><span class="index">07</span><span class="label">Branding</span></span>
-            <span class="format-card"><span class="index">08</span><span class="label">Roteiro &amp; Copy</span></span>
-            <span class="format-card"><span class="index">09</span><span class="label">E-mail Marketing</span></span>
-            <span class="format-card"><span class="index">10</span><span class="label">Design de Anúncio</span></span>
-            <span class="format-card"><span class="index">06</span><span class="label">Fotografia de Produto</span></span>
-            <span class="format-card"><span class="index">07</span><span class="label">Branding</span></span>
-            <span class="format-card"><span class="index">08</span><span class="label">Roteiro &amp; Copy</span></span>
-            <span class="format-card"><span class="index">09</span><span class="label">E-mail Marketing</span></span>
-            <span class="format-card"><span class="index">10</span><span class="label">Design de Anúncio</span></span>
+
+        <div class="format-preview">
+          <div class="format-preview-panel is-active" data-panel="video">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="6" y="10" width="36" height="28" rx="2" />
+              <path d="M20 18 L32 24 L20 30 Z" fill="currentColor" stroke="none" />
+            </svg>
+            <h4>Vídeo</h4>
+            <p>Peças em vídeo prontas pra qualquer feed, do teaser ao anúncio.</p>
+            <span class="progress-track"><span class="progress-fill"></span></span>
+          </div>
+          <div class="format-preview-panel" data-panel="social">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="6" y="6" width="10" height="10" />
+              <rect x="19" y="6" width="10" height="10" />
+              <rect x="32" y="6" width="10" height="10" />
+              <rect x="6" y="19" width="10" height="10" />
+              <rect class="pulse-cell" x="19" y="19" width="10" height="10" fill="currentColor" />
+              <rect x="32" y="19" width="10" height="10" />
+              <rect x="6" y="32" width="10" height="10" />
+              <rect x="19" y="32" width="10" height="10" />
+              <rect x="32" y="32" width="10" height="10" />
+            </svg>
+            <h4>Social Media</h4>
+            <p>Grade, stories e legendas com a mesma voz em todo canal.</p>
+          </div>
+          <div class="format-preview-panel" data-panel="landing">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="8" y="4" width="32" height="40" />
+              <line x1="8" y1="12" x2="40" y2="12" />
+              <rect x="12" y="18" width="24" height="8" />
+              <rect x="12" y="30" width="24" height="6" />
+            </svg>
+            <h4>Landing Page</h4>
+            <p>Página feita pra converter tráfego de campanha em contato.</p>
+          </div>
+          <div class="format-preview-panel" data-panel="identidade">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="16" cy="24" r="10" />
+              <circle cx="26" cy="16" r="10" />
+              <circle cx="26" cy="32" r="10" />
+            </svg>
+            <h4>Identidade Visual</h4>
+            <p>Paleta, tipografia e sistema gráfico que sustentam a marca.</p>
+          </div>
+          <div class="format-preview-panel" data-panel="trafego">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="20" cy="28" r="14" />
+              <circle cx="20" cy="28" r="5" />
+              <polyline points="26,22 42,6" stroke-linecap="square" />
+              <polyline points="32,6 42,6 42,16" stroke-linecap="square" />
+            </svg>
+            <h4>Campanha de Tráfego</h4>
+            <p>Segmentação e mídia paga apontadas pro objetivo certo.</p>
+          </div>
+          <div class="format-preview-panel" data-panel="foto">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="6" y="14" width="36" height="24" rx="3" />
+              <rect x="18" y="8" width="12" height="8" rx="2" />
+              <circle cx="24" cy="26" r="7" />
+            </svg>
+            <h4>Fotografia de Produto</h4>
+            <p>Imagem de catálogo com luz e composição consistentes.</p>
+          </div>
+          <div class="format-preview-panel" data-panel="branding">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="10" y="10" width="20" height="20" transform="rotate(45 20 20)" />
+              <circle cx="30" cy="30" r="12" />
+            </svg>
+            <h4>Branding</h4>
+            <p>Posicionamento e discurso por trás de cada peça que sai.</p>
+          </div>
+          <div class="format-preview-panel" data-panel="copy">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="8" y1="12" x2="40" y2="12" />
+              <line x1="8" y1="20" x2="34" y2="20" />
+              <line x1="8" y1="28" x2="38" y2="28" />
+              <line x1="8" y1="36" x2="24" y2="36" />
+            </svg>
+            <h4>Roteiro &amp; Copy</h4>
+            <p>Texto que carrega a estratégia em qualquer formato.</p>
+          </div>
+          <div class="format-preview-panel" data-panel="email">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="6" y="10" width="36" height="26" rx="2" />
+              <path d="M6 12 L24 26 L42 12" />
+            </svg>
+            <h4>E-mail Marketing</h4>
+            <p>Fluxos e disparos que mantêm a base aquecida.</p>
+          </div>
+          <div class="format-preview-panel" data-panel="anuncio">
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="6" y="8" width="36" height="30" rx="2" />
+              <path d="M30 8 L42 8 L42 20 Z" fill="currentColor" stroke="none" />
+            </svg>
+            <h4>Design de Anúncio</h4>
+            <p>Arte estática pensada pra performar em campanha.</p>
           </div>
         </div>
       </div>

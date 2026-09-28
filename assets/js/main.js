@@ -254,6 +254,70 @@
   }
 
   /* -----------------------------------------------------
+     Laboratório de formatos (cases.html) — chip + prévia
+     ----------------------------------------------------- */
+  var formatLabAutoplayTimer = null;
+
+  function initFormatLab() {
+    var lab = mainEl.querySelector(".format-lab");
+    if (!lab) return;
+
+    var chips = lab.querySelectorAll(".format-chip");
+    var panels = lab.querySelectorAll(".format-preview-panel");
+    var current = 0;
+
+    function activate(index) {
+      var chip = chips[index];
+      if (!chip) return;
+      current = index;
+      var format = chip.dataset.format;
+
+      chips.forEach(function (c) {
+        c.setAttribute("aria-pressed", "false");
+      });
+      chip.setAttribute("aria-pressed", "true");
+
+      panels.forEach(function (p) {
+        p.classList.toggle("is-active", p.dataset.panel === format);
+      });
+    }
+
+    chips.forEach(function (chip, index) {
+      chip.addEventListener("mouseenter", function () {
+        stopAutoplay();
+        activate(index);
+      });
+      chip.addEventListener("focus", function () {
+        stopAutoplay();
+        activate(index);
+      });
+      chip.addEventListener("click", function () {
+        stopAutoplay();
+        activate(index);
+      });
+    });
+
+    function stopAutoplay() {
+      if (formatLabAutoplayTimer) {
+        clearInterval(formatLabAutoplayTimer);
+        formatLabAutoplayTimer = null;
+      }
+    }
+
+    function startAutoplay() {
+      if (prefersReducedMotion || chips.length < 2) return;
+      stopAutoplay();
+      formatLabAutoplayTimer = setInterval(function () {
+        activate((current + 1) % chips.length);
+      }, 3200);
+    }
+
+    activate(0);
+    startAutoplay();
+    lab.addEventListener("mouseleave", startAutoplay);
+  }
+
+  /* -----------------------------------------------------
      Formulário de contato (Netlify Forms via fetch)
      ----------------------------------------------------- */
   function initContactForm() {
@@ -308,6 +372,7 @@
     initReveal();
     initHeroSwitcher();
     initServicePanels();
+    initFormatLab();
     initContactForm();
     scrollToTarget(targetUrl || window.location.href);
   }
