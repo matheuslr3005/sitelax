@@ -286,94 +286,6 @@
   }
 
   /* -----------------------------------------------------
-     Case de exemplo (trabalhos.html): contador de números
-     e barra de trajetória (antes/depois)
-     ----------------------------------------------------- */
-  function initCaseStats() {
-    var statsEl = mainEl.querySelector(".case-stats");
-    if (!statsEl) return;
-    var values = statsEl.querySelectorAll(".stat-value");
-    var animated = false;
-
-    function formatNumber(value, decimals) {
-      return value.toLocaleString("pt-BR", {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals,
-      });
-    }
-
-    function animate() {
-      if (animated) return;
-      animated = true;
-
-      values.forEach(function (el) {
-        var target = parseFloat(el.dataset.countTo);
-        var decimals = parseInt(el.dataset.decimals || "0", 10);
-        var suffix = el.dataset.suffix || "";
-        if (isNaN(target)) return;
-
-        if (prefersReducedMotion) {
-          el.textContent = formatNumber(target, decimals) + suffix;
-          return;
-        }
-
-        var duration = 1400;
-        var start = null;
-
-        function step(timestamp) {
-          if (start === null) start = timestamp;
-          var progress = Math.min((timestamp - start) / duration, 1);
-          var eased = 1 - Math.pow(1 - progress, 3);
-          el.textContent = formatNumber(target * eased, decimals) + suffix;
-          if (progress < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      });
-    }
-
-    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-      animate();
-      return;
-    }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            animate();
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-    observer.observe(statsEl);
-  }
-
-  function initTrajectory() {
-    var el = mainEl.querySelector(".trajectory");
-    if (!el) return;
-
-    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-      el.classList.add("is-filled");
-      return;
-    }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            el.classList.add("is-filled");
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-    observer.observe(el);
-  }
-
-  /* -----------------------------------------------------
      Inicialização por página
      ----------------------------------------------------- */
   function scrollToTarget(rawUrl) {
@@ -396,8 +308,6 @@
     initReveal();
     initHeroSwitcher();
     initServicePanels();
-    initCaseStats();
-    initTrajectory();
     initContactForm();
     scrollToTarget(targetUrl || window.location.href);
   }
