@@ -713,6 +713,84 @@ body.has-fine-pointer .cursor-ring {
 }
 
 /* ---------------------------------------------------------
+   Marcador de capítulo — número + nome da seção, fixo,
+   desliza de um lado pro outro quando a seção ativa muda
+   --------------------------------------------------------- */
+.chapter-marker {
+  position: fixed;
+  right: var(--space-4);
+  top: 104px;
+  z-index: 450;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  text-align: right;
+  transition: opacity var(--dur-mid) var(--ease-out);
+}
+
+@media (min-width: 900px) {
+  .chapter-marker {
+    display: flex;
+  }
+}
+
+.chapter-marker.is-visible {
+  opacity: 1;
+}
+
+.chapter-marker-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 1.5rem + 1.4vw, 2.4rem);
+  line-height: 1;
+  color: var(--color-brand-red);
+}
+
+.chapter-marker-label {
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-ink-muted);
+}
+
+.chapter-marker-num,
+.chapter-marker-label {
+  display: inline-block;
+  transition: transform 0.32s var(--ease-out), opacity 0.32s var(--ease-out);
+}
+
+.chapter-marker.is-out .chapter-marker-num,
+.chapter-marker.is-out .chapter-marker-label {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.chapter-marker.is-entering .chapter-marker-num,
+.chapter-marker.is-entering .chapter-marker-label {
+  transform: translateX(20px);
+  opacity: 0;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter-marker-num,
+  .chapter-marker-label {
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .chapter-marker.is-out .chapter-marker-num,
+  .chapter-marker.is-out .chapter-marker-label,
+  .chapter-marker.is-entering .chapter-marker-num,
+  .chapter-marker.is-entering .chapter-marker-label {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------
    Section basics + reveal
    --------------------------------------------------------- */
 .section {

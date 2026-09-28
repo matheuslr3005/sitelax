@@ -435,13 +435,13 @@
      Navegação por seção: nav superior + dots laterais
      + atalhos de teclado, pensados pra apresentar ao vivo
      ----------------------------------------------------- */
-  var SECTION_TONES = {
-    "quem-somos": "var(--color-surface)",
-    servicos: "var(--color-surface-raised)",
-    metodo: "var(--color-surface)",
-    cases: "var(--color-surface-raised)",
-    time: "var(--color-surface)",
-    contato: "var(--color-surface-wine)",
+  var SECTION_META = {
+    "quem-somos": { tone: "var(--color-surface)", num: "01", label: "Quem somos" },
+    servicos: { tone: "var(--color-surface-raised)", num: "02", label: "O que fazemos" },
+    metodo: { tone: "var(--color-surface)", num: "03", label: "Como trabalhamos" },
+    cases: { tone: "var(--color-surface-raised)", num: "04", label: "Cases" },
+    time: { tone: "var(--color-surface)", num: "05", label: "Time" },
+    contato: { tone: "var(--color-surface-wine)", num: "06", label: "Contato" },
   };
 
   function initSectionNav() {
@@ -449,6 +449,27 @@
     if (!sections.length) return;
 
     var trackedLinks = Array.prototype.slice.call(document.querySelectorAll("[data-section]"));
+    var chapterMarker = document.querySelector(".chapter-marker");
+    var chapterNumEl = chapterMarker && chapterMarker.querySelector(".chapter-marker-num");
+    var chapterLabelEl = chapterMarker && chapterMarker.querySelector(".chapter-marker-label");
+    var currentChapterId = null;
+
+    function swapChapter(meta) {
+      if (prefersReducedMotion) {
+        chapterNumEl.textContent = meta.num;
+        chapterLabelEl.textContent = meta.label;
+        return;
+      }
+      chapterMarker.classList.add("is-out");
+      window.setTimeout(function () {
+        chapterNumEl.textContent = meta.num;
+        chapterLabelEl.textContent = meta.label;
+        chapterMarker.classList.remove("is-out");
+        chapterMarker.classList.add("is-entering");
+        void chapterMarker.offsetWidth;
+        chapterMarker.classList.remove("is-entering");
+      }, 260);
+    }
 
     function setActive(id) {
       trackedLinks.forEach(function (link) {
@@ -458,10 +479,21 @@
           link.removeAttribute("aria-current");
         }
       });
-      if (SECTION_TONES[id]) {
-        body.style.backgroundColor = SECTION_TONES[id];
-      } else {
-        body.style.backgroundColor = "";
+
+      var meta = SECTION_META[id];
+      body.style.backgroundColor = meta ? meta.tone : "";
+
+      if (chapterMarker) {
+        if (meta) {
+          chapterMarker.classList.add("is-visible");
+          if (id !== currentChapterId) {
+            swapChapter(meta);
+            currentChapterId = id;
+          }
+        } else {
+          chapterMarker.classList.remove("is-visible");
+          currentChapterId = null;
+        }
       }
     }
 
