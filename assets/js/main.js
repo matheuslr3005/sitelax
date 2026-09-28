@@ -46,12 +46,12 @@
     requestAnimationFrame(loop);
 
     document.addEventListener("mouseover", function (e) {
-      if (e.target.closest("a, button, .service-switcher li, [data-cursor-active]")) {
+      if (e.target.closest("a, button, .service-tile, [data-cursor-active]")) {
         body.classList.add("cursor-active");
       }
     });
     document.addEventListener("mouseout", function (e) {
-      if (e.target.closest("a, button, .service-switcher li, [data-cursor-active]")) {
+      if (e.target.closest("a, button, .service-tile, [data-cursor-active]")) {
         body.classList.remove("cursor-active");
       }
     });
@@ -152,7 +152,7 @@
     if (!hero) return;
 
     var aurora = hero.querySelector(".hero-aurora");
-    var buttons = hero.querySelectorAll(".service-switcher button");
+    var buttons = hero.querySelectorAll(".service-tile");
     var current = 0;
 
     function activate(index) {
