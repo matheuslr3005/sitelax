@@ -435,6 +435,15 @@
      Navegação por seção: nav superior + dots laterais
      + atalhos de teclado, pensados pra apresentar ao vivo
      ----------------------------------------------------- */
+  var SECTION_TONES = {
+    "quem-somos": "var(--color-surface)",
+    servicos: "var(--color-surface-raised)",
+    metodo: "var(--color-surface)",
+    cases: "var(--color-surface-raised)",
+    time: "var(--color-surface)",
+    contato: "var(--color-surface-wine)",
+  };
+
   function initSectionNav() {
     var sections = Array.prototype.slice.call(mainEl.querySelectorAll(".story-section[id]"));
     if (!sections.length) return;
@@ -449,6 +458,11 @@
           link.removeAttribute("aria-current");
         }
       });
+      if (SECTION_TONES[id]) {
+        body.style.backgroundColor = SECTION_TONES[id];
+      } else {
+        body.style.backgroundColor = "";
+      }
     }
 
     if (trackedLinks.length && "IntersectionObserver" in window) {
