@@ -711,47 +711,6 @@ body.has-fine-pointer .cursor-ring {
   color: var(--color-accent-sand);
 }
 
-.scroll-cue {
-  position: absolute;
-  bottom: var(--space-4);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: var(--fs-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-ink-muted);
-}
-
-.scroll-cue .line {
-  width: 1px;
-  height: 32px;
-  background: var(--color-hairline);
-  overflow: hidden;
-  position: relative;
-}
-
-.scroll-cue .line::after {
-  content: "";
-  position: absolute;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--color-brand-red);
-  animation: scrollcue 1.8s var(--ease-in-out) infinite;
-}
-
-@keyframes scrollcue {
-  to {
-    top: 100%;
-  }
-}
-
 /* ---------------------------------------------------------
    Section basics + reveal
    --------------------------------------------------------- */
@@ -795,36 +754,28 @@ body.has-fine-pointer .cursor-ring {
    Pillars grid (home)
    --------------------------------------------------------- */
 .pillars-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--color-hairline);
-  border: 1px solid var(--color-hairline);
-}
-
-@media (min-width: 700px) {
-  .pillars-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1100px) {
-  .pillars-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
 }
 
 .pillar-card {
   position: relative;
+  flex: 1 1 320px;
+  max-width: 380px;
   background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-sm);
   padding: var(--space-5) var(--space-4);
   min-height: 220px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  transition: background var(--dur-mid) var(--ease-out);
+  transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out);
 }
+
 
 .pillar-card::before {
   content: attr(data-index);
@@ -839,6 +790,7 @@ body.has-fine-pointer .cursor-ring {
 
 .pillar-card:hover {
   background: var(--color-brand-wine);
+  border-color: var(--color-brand-wine);
 }
 
 .pillar-card:hover::before {
