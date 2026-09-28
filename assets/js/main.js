@@ -255,21 +255,34 @@
 
     hero.addEventListener("mouseleave", startAutoplay);
 
-    /* leve paralaxe do fundo (auroras) conforme o cursor */
-    if (aurora && window.matchMedia("(pointer: fine)").matches && !prefersReducedMotion) {
+    /* paralaxe do fundo (auroras): segue o cursor e reage ao scroll */
+    if (aurora && !prefersReducedMotion) {
       var px = 0;
       var py = 0;
       var tx = 0;
       var ty = 0;
-      hero.addEventListener("mousemove", function (e) {
-        var rect = hero.getBoundingClientRect();
-        px = (e.clientX - rect.left) / rect.width - 0.5;
-        py = (e.clientY - rect.top) / rect.height - 0.5;
-      });
+      var scrollShift = 0;
+
+      if (window.matchMedia("(pointer: fine)").matches) {
+        hero.addEventListener("mousemove", function (e) {
+          var rect = hero.getBoundingClientRect();
+          px = (e.clientX - rect.left) / rect.width - 0.5;
+          py = (e.clientY - rect.top) / rect.height - 0.5;
+        });
+      }
+
+      window.addEventListener(
+        "scroll",
+        function () {
+          scrollShift = window.scrollY * 0.08;
+        },
+        { passive: true }
+      );
+
       (function parallaxLoop() {
         tx += (px - tx) * 0.04;
         ty += (py - ty) * 0.04;
-        aurora.style.transform = "translate(" + tx * 30 + "px, " + ty * 20 + "px)";
+        aurora.style.transform = "translate(" + tx * 30 + "px, " + (ty * 20 + scrollShift) + "px)";
         requestAnimationFrame(parallaxLoop);
       })();
     }
@@ -288,6 +301,57 @@
       panelKeyAttr: "data-panel",
       autoplayDelay: 3200,
     });
+  }
+
+  /* -----------------------------------------------------
+     Efeitos de scroll: profundidade 3D
+     Cards e elementos decorativos reagem à posição de scroll
+     (tilt sutil em rotateX + leve deslocamento de paralaxe).
+     ----------------------------------------------------- */
+  function initScrollFX() {
+    if (prefersReducedMotion) return;
+
+    var tiltItems = Array.prototype.slice.call(mainEl.querySelectorAll("[data-tilt]"));
+    var driftItems = Array.prototype.slice.call(mainEl.querySelectorAll("[data-parallax]"));
+    if (!tiltItems.length && !driftItems.length) return;
+
+    var ticking = false;
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function update() {
+      var vh = window.innerHeight;
+      var vCenter = vh / 2;
+
+      tiltItems.forEach(function (el) {
+        var maxDeg = parseFloat(el.dataset.tilt) || 5;
+        var rect = el.getBoundingClientRect();
+        var progress = clamp((vCenter - (rect.top + rect.height / 2)) / vh, -1, 1);
+        el.style.transform = "perspective(1400px) rotateX(" + (-progress * maxDeg).toFixed(2) + "deg)";
+      });
+
+      driftItems.forEach(function (el) {
+        var speed = parseFloat(el.dataset.parallax) || 0.08;
+        var rect = el.getBoundingClientRect();
+        var offset = (rect.top + rect.height / 2 - vCenter) * speed;
+        el.style.transform = "translate3d(0, " + offset.toFixed(1) + "px, 0)";
+      });
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
   }
 
   /* -----------------------------------------------------
@@ -389,6 +453,7 @@
     initFormatLab();
     initContactForm();
     initSectionNav();
+    initScrollFX();
 
     window.requestAnimationFrame(function () {
       body.classList.add("is-loaded");

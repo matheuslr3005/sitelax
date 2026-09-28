@@ -733,13 +733,19 @@ body.has-fine-pointer .cursor-ring {
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  transform: perspective(1200px) translateY(32px) rotateX(8deg);
+  transform-origin: 50% 100%;
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
 }
 
 [data-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: perspective(1200px) translateY(0) rotateX(0deg);
+}
+
+[data-tilt],
+[data-parallax] {
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -747,6 +753,11 @@ body.has-fine-pointer .cursor-ring {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  [data-tilt],
+  [data-parallax] {
+    transform: none !important;
   }
 }
 
@@ -768,6 +779,9 @@ body.has-fine-pointer .cursor-ring {
 }
 
 .about-lead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
   font-size: var(--fs-body-lg);
   color: var(--color-ink-muted);
   max-width: 46ch;
@@ -823,14 +837,14 @@ body.has-fine-pointer .cursor-ring {
 }
 
 
-.pillar-card::before {
-  content: attr(data-index);
+.pillar-num {
   position: absolute;
   top: var(--space-3);
   right: var(--space-4);
   font-family: var(--font-display);
   font-size: var(--fs-display-md);
   color: var(--color-surface-raised);
+  pointer-events: none;
   transition: color var(--dur-mid) var(--ease-out);
 }
 
@@ -839,7 +853,7 @@ body.has-fine-pointer .cursor-ring {
   border-color: var(--color-brand-wine);
 }
 
-.pillar-card:hover::before {
+.pillar-card:hover .pillar-num {
   color: rgba(245, 243, 241, 0.18);
 }
 
