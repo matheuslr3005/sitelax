@@ -797,6 +797,25 @@ body.has-fine-pointer .cursor-ring {
   color: rgba(245, 243, 241, 0.18);
 }
 
+.pillar-icon {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  margin-bottom: var(--space-3);
+  color: var(--color-brand-red);
+  transition: color var(--dur-mid) var(--ease-out);
+}
+
+.pillar-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pillar-card:hover .pillar-icon {
+  color: var(--color-accent-sand);
+}
+
 .pillar-card h3 {
   font-size: var(--fs-title);
   max-width: 16ch;
@@ -948,6 +967,10 @@ body.has-fine-pointer .cursor-ring {
   margin-top: var(--space-3);
 }
 
+.page-head h1.is-oneline {
+  max-width: none;
+}
+
 .page-head p {
   margin-top: var(--space-4);
   max-width: 56ch;
@@ -1010,6 +1033,20 @@ body.has-fine-pointer .cursor-ring {
   color: var(--color-brand-red);
 }
 
+.service-panel-icon {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--space-3);
+  color: var(--color-brand-red);
+}
+
+.service-panel-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .service-panel h3 {
   font-size: var(--fs-display-md);
   line-height: 1.05;
@@ -1045,7 +1082,7 @@ body.has-fine-pointer .cursor-ring {
 }
 
 /* ---------------------------------------------------------
-   Empty state (trabalhos.html)
+   Empty state (cases.html)
    --------------------------------------------------------- */
 .empty-state {
   display: grid;
@@ -1083,7 +1120,7 @@ body.has-fine-pointer .cursor-ring {
 }
 
 /* ---------------------------------------------------------
-   Parede de formatos — marquee de duas vias (trabalhos.html)
+   Parede de formatos — marquee de duas vias (cases.html)
    --------------------------------------------------------- */
 .format-wall {
   display: flex;
@@ -1174,7 +1211,7 @@ body.has-fine-pointer .cursor-ring {
 }
 
 /* ---------------------------------------------------------
-   Frase com gradiente animado (trabalhos.html)
+   Frase com gradiente animado (cases.html)
    --------------------------------------------------------- */
 .shimmer-statement {
   text-align: center;
@@ -1215,7 +1252,7 @@ body.has-fine-pointer .cursor-ring {
 }
 
 /* ---------------------------------------------------------
-   Tags flutuantes (trabalhos.html)
+   Tags flutuantes (cases.html)
    --------------------------------------------------------- */
 .tag-cloud--float span {
   display: inline-block;
