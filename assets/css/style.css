@@ -828,21 +828,23 @@ body.has-fine-pointer .cursor-ring {
 #quem-somos {
   position: relative;
   overflow: hidden;
+  perspective: 1600px;
 }
 
 #quem-somos .container {
   position: relative;
   z-index: 1;
+  transform: translateZ(90px);
 }
 
 .globe-wrap {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(-340px);
   width: min(78vw, 980px);
   height: min(78vw, 980px);
-  opacity: 0.28;
+  opacity: 0.32;
   z-index: 0;
   pointer-events: none;
 }
