@@ -714,6 +714,9 @@ body.has-fine-pointer .cursor-ring {
 
 /* ---------------------------------------------------------
    Mascote: mini-astronauta que desce a página com o scroll
+   Oculto a pedido (17/06): design em revisão, mantido no
+   código para retomar depois. Basta remover a linha
+   "display: none !important;" abaixo para reativar.
    --------------------------------------------------------- */
 .astro-wrap {
   position: fixed;
@@ -730,6 +733,10 @@ body.has-fine-pointer .cursor-ring {
   .astro-wrap {
     display: block;
   }
+}
+
+.astro-wrap {
+  display: none !important;
 }
 
 .astro-hover-scale {
