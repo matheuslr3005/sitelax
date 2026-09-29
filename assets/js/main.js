@@ -365,6 +365,9 @@
     var ticking = false;
     var bounceTimer = null;
 
+    var ZIGZAG_CYCLES = 5;
+    var ZIGZAG_AMPLITUDE = 30;
+
     function update() {
       var maxScroll = docEl.scrollHeight - window.innerHeight;
       var progress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
@@ -373,7 +376,8 @@
       var bottomMargin = 110;
       var travel = Math.max(0, vh - topMargin - bottomMargin);
       var y = topMargin + progress * travel;
-      wrap.style.transform = "translateY(" + y.toFixed(1) + "px)";
+      var x = Math.sin(progress * ZIGZAG_CYCLES * Math.PI * 2) * ZIGZAG_AMPLITUDE;
+      wrap.style.transform = "translate(" + x.toFixed(1) + "px, " + y.toFixed(1) + "px)";
       ticking = false;
     }
 
