@@ -57,21 +57,34 @@
   <div class="astro-wrap" id="astroWrap" role="button" tabindex="0" aria-label="Mascote LAX, um pequeno astronauta">
     <div class="astro-hover-scale">
       <div class="astro-float">
-        <svg class="astro-svg" viewBox="0 0 120 160" aria-hidden="true">
-          <rect class="astro-pack" x="38" y="70" width="44" height="50" rx="12" />
-          <rect class="astro-limb" x="14" y="76" width="20" height="34" rx="10" transform="rotate(-12 24 93)" />
-          <rect class="astro-limb" x="86" y="76" width="20" height="34" rx="10" transform="rotate(12 96 93)" />
-          <rect class="astro-suit" x="30" y="66" width="60" height="58" rx="22" />
-          <circle class="astro-badge" cx="60" cy="93" r="8" />
-          <rect class="astro-limb" x="36" y="118" width="16" height="30" rx="8" />
-          <rect class="astro-limb" x="68" y="118" width="16" height="30" rx="8" />
-          <rect class="astro-boot" x="32" y="144" width="24" height="10" rx="4" />
-          <rect class="astro-boot" x="64" y="144" width="24" height="10" rx="4" />
-          <circle class="astro-helmet" cx="60" cy="44" r="38" />
-          <ellipse class="astro-visor" cx="60" cy="47" rx="26" ry="24" />
-          <path class="astro-visor-shine" d="M 40 34 Q 46 24 60 22" />
-          <rect class="astro-antenna" x="57" y="2" width="6" height="12" rx="2" />
-          <circle class="astro-antenna-light" cx="60" cy="2" r="5" />
+        <svg class="astro-svg" viewBox="0 0 100 116" aria-hidden="true">
+          <defs>
+            <radialGradient id="astroHelmetGrad" cx="35%" cy="28%" r="75%">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="55%" stop-color="#f5f3f1" />
+              <stop offset="100%" stop-color="#c7c3be" />
+            </radialGradient>
+            <radialGradient id="astroVisorGrad" cx="32%" cy="26%" r="80%">
+              <stop offset="0%" stop-color="#3c3c3c" />
+              <stop offset="100%" stop-color="#141414" />
+            </radialGradient>
+            <linearGradient id="astroBodyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="100%" stop-color="#d4d0cb" />
+            </linearGradient>
+            <radialGradient id="astroArmGrad" cx="35%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="100%" stop-color="#cfcbc6" />
+            </radialGradient>
+          </defs>
+          <ellipse class="astro-shadow" cx="50" cy="110" rx="20" ry="4.5" />
+          <path class="astro-body" d="M31 66 Q31 98 50 102 Q69 98 69 66 Z" />
+          <circle class="astro-arm" cx="21" cy="72" r="9.5" />
+          <circle class="astro-arm" cx="79" cy="72" r="9.5" />
+          <circle class="astro-badge" cx="50" cy="80" r="4" />
+          <circle class="astro-helmet" cx="50" cy="40" r="32" />
+          <ellipse class="astro-visor" cx="50" cy="42" rx="21" ry="19" />
+          <path class="astro-visor-shine" d="M33 31 Q39 21 50 19" />
         </svg>
       </div>
     </div>

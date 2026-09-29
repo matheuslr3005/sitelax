@@ -717,11 +717,11 @@ body.has-fine-pointer .cursor-ring {
    --------------------------------------------------------- */
 .astro-wrap {
   position: fixed;
-  left: var(--space-4);
+  right: 6px;
   top: 0;
-  z-index: 460;
+  z-index: 440;
   display: none;
-  width: 56px;
+  width: 34px;
   cursor: pointer;
   will-change: transform;
 }
@@ -738,7 +738,7 @@ body.has-fine-pointer .cursor-ring {
 
 .astro-wrap:hover .astro-hover-scale,
 .astro-wrap:focus-visible .astro-hover-scale {
-  transform: scale(1.14);
+  transform: scale(1.18);
 }
 
 .astro-wrap:focus-visible {
@@ -754,10 +754,10 @@ body.has-fine-pointer .cursor-ring {
 @keyframes astro-idle {
   0%,
   100% {
-    transform: translateY(0) rotate(-3deg);
+    transform: translateY(0) rotate(-4deg);
   }
   50% {
-    transform: translateY(-9px) rotate(3deg);
+    transform: translateY(-6px) rotate(4deg);
   }
 }
 
@@ -785,36 +785,31 @@ body.has-fine-pointer .cursor-ring {
   height: auto;
   display: block;
   overflow: visible;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
 }
 
-.astro-suit {
-  fill: var(--color-ink);
+.astro-shadow {
+  fill: rgba(0, 0, 0, 0.3);
 }
 
-.astro-pack {
-  fill: var(--color-brand-wine);
+.astro-body {
+  fill: url(#astroBodyGrad);
 }
 
-.astro-limb {
-  fill: var(--color-ink);
+.astro-arm {
+  fill: url(#astroArmGrad);
 }
 
 .astro-badge {
   fill: var(--color-brand-red);
 }
 
-.astro-boot {
-  fill: var(--color-brand-wine);
-}
-
 .astro-helmet {
-  fill: var(--color-ink);
-  stroke: var(--color-hairline);
-  stroke-width: 1.5;
+  fill: url(#astroHelmetGrad);
 }
 
 .astro-visor {
-  fill: var(--color-surface-raised);
+  fill: url(#astroVisorGrad);
 }
 
 .astro-visor-shine {
@@ -822,26 +817,7 @@ body.has-fine-pointer .cursor-ring {
   stroke: var(--color-accent-sand);
   stroke-width: 3;
   stroke-linecap: round;
-  opacity: 0.55;
-}
-
-.astro-antenna {
-  fill: var(--color-hairline);
-}
-
-.astro-antenna-light {
-  fill: var(--color-brand-red);
-  animation: astro-beacon 1.6s ease-in-out infinite;
-}
-
-@keyframes astro-beacon {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
+  opacity: 0.65;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -849,9 +825,6 @@ body.has-fine-pointer .cursor-ring {
     animation: none;
   }
   .astro-wrap.is-bouncing .astro-float {
-    animation: none;
-  }
-  .astro-antenna-light {
     animation: none;
   }
 }
