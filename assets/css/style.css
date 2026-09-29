@@ -713,6 +713,150 @@ body.has-fine-pointer .cursor-ring {
 }
 
 /* ---------------------------------------------------------
+   Mascote: mini-astronauta que desce a página com o scroll
+   --------------------------------------------------------- */
+.astro-wrap {
+  position: fixed;
+  left: var(--space-4);
+  top: 0;
+  z-index: 460;
+  display: none;
+  width: 56px;
+  cursor: pointer;
+  will-change: transform;
+}
+
+@media (min-width: 900px) {
+  .astro-wrap {
+    display: block;
+  }
+}
+
+.astro-hover-scale {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.astro-wrap:hover .astro-hover-scale,
+.astro-wrap:focus-visible .astro-hover-scale {
+  transform: scale(1.14);
+}
+
+.astro-wrap:focus-visible {
+  outline: 2px solid var(--color-brand-red);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.astro-float {
+  animation: astro-idle 4.5s ease-in-out infinite;
+}
+
+@keyframes astro-idle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(3deg);
+  }
+}
+
+.astro-wrap.is-bouncing .astro-float {
+  animation: astro-bounce 0.75s var(--ease-out);
+}
+
+@keyframes astro-bounce {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  30% {
+    transform: scale(1.16, 0.85) rotate(-10deg);
+  }
+  65% {
+    transform: scale(0.94, 1.08) rotate(300deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+.astro-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.astro-suit {
+  fill: var(--color-ink);
+}
+
+.astro-pack {
+  fill: var(--color-brand-wine);
+}
+
+.astro-limb {
+  fill: var(--color-ink);
+}
+
+.astro-badge {
+  fill: var(--color-brand-red);
+}
+
+.astro-boot {
+  fill: var(--color-brand-wine);
+}
+
+.astro-helmet {
+  fill: var(--color-ink);
+  stroke: var(--color-hairline);
+  stroke-width: 1.5;
+}
+
+.astro-visor {
+  fill: var(--color-surface-raised);
+}
+
+.astro-visor-shine {
+  fill: none;
+  stroke: var(--color-accent-sand);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.astro-antenna {
+  fill: var(--color-hairline);
+}
+
+.astro-antenna-light {
+  fill: var(--color-brand-red);
+  animation: astro-beacon 1.6s ease-in-out infinite;
+}
+
+@keyframes astro-beacon {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .astro-float {
+    animation: none;
+  }
+  .astro-wrap.is-bouncing .astro-float {
+    animation: none;
+  }
+  .astro-antenna-light {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------
    Marcador de capítulo — número + nome da seção, fixo,
    desliza de um lado pro outro quando a seção ativa muda
    --------------------------------------------------------- */

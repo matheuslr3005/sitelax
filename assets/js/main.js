@@ -355,6 +355,59 @@
   }
 
   /* -----------------------------------------------------
+     Mascote: astronauta que desce a página com o scroll
+     ----------------------------------------------------- */
+  function initAstronaut() {
+    var wrap = document.getElementById("astroWrap");
+    if (!wrap) return;
+
+    var docEl = document.documentElement;
+    var ticking = false;
+    var bounceTimer = null;
+
+    function update() {
+      var maxScroll = docEl.scrollHeight - window.innerHeight;
+      var progress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+      var vh = window.innerHeight;
+      var topMargin = 100;
+      var bottomMargin = 110;
+      var travel = Math.max(0, vh - topMargin - bottomMargin);
+      var y = topMargin + progress * travel;
+      wrap.style.transform = "translateY(" + y.toFixed(1) + "px)";
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+
+    function bounce() {
+      wrap.classList.remove("is-bouncing");
+      void wrap.offsetWidth;
+      wrap.classList.add("is-bouncing");
+      window.clearTimeout(bounceTimer);
+      bounceTimer = window.setTimeout(function () {
+        wrap.classList.remove("is-bouncing");
+      }, 800);
+    }
+
+    wrap.addEventListener("click", bounce);
+    wrap.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        bounce();
+      }
+    });
+  }
+
+  /* -----------------------------------------------------
      Globo Brasil ⇄ Europa (Quem somos)
      Meridianos em SVG "giram" conforme a posição de scroll,
      truque clássico de achatar/expandir elipses pra simular
@@ -546,6 +599,7 @@
     initSectionNav();
     initScrollFX();
     initGlobe();
+    initAstronaut();
 
     window.requestAnimationFrame(function () {
       body.classList.add("is-loaded");
