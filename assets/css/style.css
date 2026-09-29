@@ -901,6 +901,33 @@ body.has-fine-pointer .cursor-ring {
   flex-shrink: 0;
 }
 
+.stat-row {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-hairline);
+}
+
+.stat-item {
+  flex: 1 1 160px;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-display-md);
+  color: var(--color-brand-red);
+  line-height: 1;
+}
+
+.stat-label {
+  margin-top: var(--space-2);
+  font-size: var(--fs-caption);
+  color: var(--color-ink-muted);
+}
+
 /* ---------------------------------------------------------
    Globo Brasil ⇄ Europa (Quem somos) — cenário de fundo
    --------------------------------------------------------- */
@@ -1532,6 +1559,73 @@ body.has-fine-pointer .cursor-ring {
   margin-top: var(--space-2);
   color: var(--color-ink-muted);
   font-size: var(--fs-caption);
+}
+
+/* ---------------------------------------------------------
+   Fundadores (time.html)
+   --------------------------------------------------------- */
+.founders-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 700px) {
+  .founders-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.founder-card {
+  position: relative;
+  padding: var(--space-5) var(--space-4);
+  border: 1px solid var(--color-hairline);
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.founder-mark {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-4);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(4rem, 3rem + 6vw, 7rem);
+  color: var(--color-surface-raised);
+  z-index: 0;
+  transition: color var(--dur-mid) var(--ease-out);
+}
+
+.founder-card:hover .founder-mark {
+  color: var(--color-brand-red);
+}
+
+.founder-card-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.founder-card h3 {
+  font-size: var(--fs-title);
+}
+
+.founder-role {
+  margin-top: var(--space-1);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-brand-red);
+}
+
+.founder-card-inner p:not(.founder-role) {
+  margin-top: var(--space-2);
+  color: var(--color-ink-muted);
+  font-size: var(--fs-caption);
+  max-width: 48ch;
 }
 
 /* ---------------------------------------------------------
