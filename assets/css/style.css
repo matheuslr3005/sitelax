@@ -402,7 +402,6 @@ body.has-fine-pointer .cursor-ring {
    --------------------------------------------------------- */
 .hero {
   position: relative;
-  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -415,6 +414,10 @@ body.has-fine-pointer .cursor-ring {
 
 .hero.theme-wine {
   background: var(--color-brand-wine);
+}
+
+.hero.story-section {
+  min-height: 116svh;
 }
 
 .hero-aurora {
@@ -538,19 +541,6 @@ body.has-fine-pointer .cursor-ring {
 
 .hero.theme-wine.has-hero-webgl .hero-webgl-veil {
   background: radial-gradient(ellipse 60% 55% at 50% 62%, var(--color-brand-wine) 15%, transparent 72%);
-}
-
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.5;
-  background-image: linear-gradient(to right, var(--color-hairline) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-hairline) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 78%);
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 78%);
 }
 
 .hero-inner {

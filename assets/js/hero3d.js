@@ -72,24 +72,24 @@ import * as THREE from "./vendor/three.module.min.js";
         depthWrite: false,
       })
     );
-    glowSprite.scale.set(1.0, 1.0, 1);
+    glowSprite.scale.set(1.8, 1.8, 1);
     glowSprite.position.set(0, 0, -0.3);
-    glowSprite.material.opacity = 0.55;
+    glowSprite.material.opacity = 0.65;
     scene.add(glowSprite);
 
     var ring = new THREE.Mesh(
-      new THREE.RingGeometry(0.66, 0.68, 64),
-      new THREE.MeshBasicMaterial({ color: 0xf5f3f1, transparent: true, opacity: 0.3, side: THREE.DoubleSide })
+      new THREE.RingGeometry(1.05, 1.08, 64),
+      new THREE.MeshBasicMaterial({ color: 0xf5f3f1, transparent: true, opacity: 0.42, side: THREE.DoubleSide })
     );
     ring.position.set(0, 0, -0.25);
     scene.add(ring);
 
     var ringGlow = new THREE.Mesh(
-      new THREE.RingGeometry(0.63, 0.71, 64),
+      new THREE.RingGeometry(1.0, 1.14, 64),
       new THREE.MeshBasicMaterial({
         color: 0xf5f3f1,
         transparent: true,
-        opacity: 0.08,
+        opacity: 0.1,
         side: THREE.DoubleSide,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
@@ -102,11 +102,11 @@ import * as THREE from "./vendor/three.module.min.js";
     var logoTex = loader.load("assets/img/logo/lax-color.png");
     if ("colorSpace" in logoTex) logoTex.colorSpace = THREE.SRGBColorSpace;
     var aspect = 1569 / 789;
-    var logoW = 1.15;
+    var logoW = 1.9;
     var logoGeo = new THREE.PlaneGeometry(logoW, logoW / aspect);
     var logoMesh = new THREE.Mesh(
       logoGeo,
-      new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, opacity: 0.55 })
+      new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, opacity: 0.8 })
     );
     scene.add(logoMesh);
 
@@ -166,7 +166,7 @@ import * as THREE from "./vendor/three.module.min.js";
 
       logoMesh.rotation.y = Math.sin(t * 0.22) * 0.07;
       ring.rotation.z = t * 0.045;
-      glowSprite.material.opacity = 0.5 + Math.sin(t * 1.1) * 0.08;
+      glowSprite.material.opacity = 0.6 + Math.sin(t * 1.1) * 0.08;
       dust.rotation.y = t * 0.018;
 
       renderer.render(scene, camera);
