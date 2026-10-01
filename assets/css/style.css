@@ -412,10 +412,6 @@ body.has-fine-pointer .cursor-ring {
   overflow: hidden;
 }
 
-.hero.theme-wine {
-  background: var(--color-brand-wine);
-}
-
 .hero.story-section {
   min-height: 116svh;
 }
@@ -468,10 +464,6 @@ body.has-fine-pointer .cursor-ring {
   background: radial-gradient(circle, var(--color-accent-sand), transparent 74%);
   opacity: 0.16;
   animation: aurora-c 19s var(--ease-in-out) infinite alternate;
-}
-
-.hero.theme-wine .hero-aurora .blob {
-  opacity: 0.32;
 }
 
 @keyframes aurora-a {
@@ -539,10 +531,6 @@ body.has-fine-pointer .cursor-ring {
   display: block;
 }
 
-.hero.theme-wine.has-hero-webgl .hero-webgl-veil {
-  background: radial-gradient(ellipse 60% 55% at 50% 62%, var(--color-brand-wine) 15%, transparent 72%);
-}
-
 .hero-inner {
   position: relative;
   z-index: 1;
@@ -570,10 +558,6 @@ body.has-fine-pointer .cursor-ring {
 .hero-heading em {
   font-style: normal;
   color: var(--color-brand-red);
-}
-
-.hero.theme-wine .hero-heading em {
-  color: var(--color-accent-sand);
 }
 
 .hero-actions {

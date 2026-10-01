@@ -214,10 +214,6 @@
         b.setAttribute("aria-pressed", "false");
       });
       btn.setAttribute("aria-pressed", "true");
-
-      var theme = btn.dataset.theme === "wine" ? "wine" : "dark";
-      hero.classList.toggle("theme-wine", theme === "wine");
-      hero.classList.toggle("theme-dark", theme !== "wine");
     }
 
     buttons.forEach(function (btn, index) {
