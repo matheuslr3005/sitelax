@@ -272,7 +272,8 @@ body.has-fine-pointer .cursor-ring {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: var(--tracking-label);
-  transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+  transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
 }
 
 .nav-cta:hover,
@@ -343,6 +344,14 @@ body.has-fine-pointer .cursor-ring {
   font-size: var(--fs-body);
   overflow: hidden;
   isolation: isolate;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.btn:active,
+.nav-cta:active,
+.service-tile:active,
+.format-chip:active {
+  filter: brightness(0.88);
 }
 
 .btn::before {
@@ -572,6 +581,8 @@ body.has-fine-pointer .cursor-ring {
 }
 
 .service-tile {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -583,6 +594,8 @@ body.has-fine-pointer .cursor-ring {
   background: transparent;
   color: var(--color-ink-muted);
   text-align: center;
+  --spot-x: 50%;
+  --spot-y: 50%;
   transition: background var(--dur-mid) var(--ease-out), color var(--dur-fast) var(--ease-out),
     border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
@@ -1226,7 +1239,13 @@ body.has-fine-pointer .cursor-ring {
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out);
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out),
+    transform var(--dur-mid) var(--ease-out);
 }
 
 
@@ -1434,6 +1453,8 @@ body.has-fine-pointer .cursor-ring {
 }
 
 .empty-slot {
+  position: relative;
+  overflow: hidden;
   background: var(--color-surface);
   padding: var(--space-5) var(--space-4);
   min-height: 180px;
@@ -1441,6 +1462,12 @@ body.has-fine-pointer .cursor-ring {
   flex-direction: column;
   justify-content: space-between;
   border: 1px dashed transparent;
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform var(--dur-mid) var(--ease-out);
 }
 
 .empty-slot .index {
@@ -1701,6 +1728,12 @@ body.has-fine-pointer .cursor-ring {
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform var(--dur-mid) var(--ease-out);
 }
 
 .role-mark {
@@ -1762,6 +1795,12 @@ body.has-fine-pointer .cursor-ring {
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform var(--dur-mid) var(--ease-out);
 }
 
 .founder-mark {
@@ -1931,4 +1970,82 @@ body.has-fine-pointer .cursor-ring {
 
 .form-success.is-visible {
   display: block;
+}
+
+/* ---------------------------------------------------------
+   Barra de progresso de scroll
+   Fio fino no topo que preenche conforme a página avança,
+   útil como referência visual numa apresentação ao vivo.
+   --------------------------------------------------------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 600;
+  pointer-events: none;
+}
+
+.scroll-progress-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--color-brand-red);
+  transition: width 0.12s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-fill {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------
+   Interação: spotlight + tilt 3D nos cards (mouse)
+   Cards de pilares, papéis, fundadores e os slots de case
+   ganham um brilho que segue o cursor e uma leve inclinação
+   3D, complementando a inclinação por scroll já existente.
+   Serviços do hero recebem só o brilho (já têm elevação própria).
+   --------------------------------------------------------- */
+.pillar-card::before,
+.role-card::before,
+.founder-card::before,
+.empty-slot::before,
+.service-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  background: radial-gradient(260px circle at var(--spot-x) var(--spot-y), rgba(196, 39, 44, 0.16), transparent 72%);
+  transition: opacity var(--dur-mid) var(--ease-out);
+  pointer-events: none;
+}
+
+.pillar-card.is-interactive-hover::before,
+.role-card.is-interactive-hover::before,
+.founder-card.is-interactive-hover::before,
+.empty-slot.is-interactive-hover::before,
+.service-tile.is-interactive-hover::before {
+  opacity: 1;
+}
+
+.pillar-card.is-interactive-hover,
+.role-card.is-interactive-hover,
+.founder-card.is-interactive-hover,
+.empty-slot.is-interactive-hover {
+  transition: transform 0.1s linear;
+}
+
+/* ---------------------------------------------------------
+   Interação: botões magnéticos
+   CTAs primários "puxam" sutilmente na direção do cursor
+   dentro da própria área, soltando com uma leve desaceleração.
+   --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .nav-cta {
+    transition: none !important;
+  }
 }

@@ -457,6 +457,121 @@
   }
 
   /* -----------------------------------------------------
+     Barra de progresso de scroll
+     ----------------------------------------------------- */
+  function initScrollProgress() {
+    var fill = document.querySelector(".scroll-progress-fill");
+    if (!fill) return;
+
+    var docEl = document.documentElement;
+    var ticking = false;
+
+    function update() {
+      var max = docEl.scrollHeight - window.innerHeight;
+      var progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      fill.style.width = (progress * 100).toFixed(2) + "%";
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  }
+
+  /* -----------------------------------------------------
+     Cards interativos: brilho + inclinação 3D seguindo o
+     cursor (pillar, role, founder, empty-slot e service-tile,
+     este último só com o brilho pra não brigar com seu
+     próprio translateY de hover).
+     ----------------------------------------------------- */
+  function initInteractiveCards() {
+    if (prefersReducedMotion || !window.matchMedia("(pointer: fine)").matches) return;
+
+    var cards = Array.prototype.slice.call(
+      mainEl.querySelectorAll(".pillar-card, .role-card, .founder-card, .empty-slot, .service-tile")
+    );
+    if (!cards.length) return;
+
+    cards.forEach(function (card) {
+      var hasTilt = !card.classList.contains("service-tile");
+      var tiltMax = 7;
+      var raf = null;
+
+      function onMove(e) {
+        if (raf) return;
+        raf = window.requestAnimationFrame(function () {
+          var rect = card.getBoundingClientRect();
+          var px = (e.clientX - rect.left) / rect.width;
+          var py = (e.clientY - rect.top) / rect.height;
+          card.style.setProperty("--spot-x", (px * 100).toFixed(1) + "%");
+          card.style.setProperty("--spot-y", (py * 100).toFixed(1) + "%");
+          if (hasTilt) {
+            card.style.setProperty("--tilt-x", ((0.5 - py) * tiltMax * 2).toFixed(2) + "deg");
+            card.style.setProperty("--tilt-y", ((px - 0.5) * tiltMax * 2).toFixed(2) + "deg");
+          }
+          raf = null;
+        });
+      }
+
+      card.addEventListener("mouseenter", function () {
+        card.classList.add("is-interactive-hover");
+        card.addEventListener("mousemove", onMove);
+      });
+      card.addEventListener("mouseleave", function () {
+        card.removeEventListener("mousemove", onMove);
+        card.classList.remove("is-interactive-hover");
+        if (hasTilt) {
+          card.style.setProperty("--tilt-x", "0deg");
+          card.style.setProperty("--tilt-y", "0deg");
+        }
+      });
+    });
+  }
+
+  /* -----------------------------------------------------
+     Botões magnéticos: CTAs puxam sutilmente na direção
+     do cursor enquanto o mouse estiver sobre eles.
+     ----------------------------------------------------- */
+  function initMagneticButtons() {
+    if (prefersReducedMotion || !window.matchMedia("(pointer: fine)").matches) return;
+
+    var targets = Array.prototype.slice.call(document.querySelectorAll(".btn, .nav-cta"));
+    if (!targets.length) return;
+
+    var MAX_PULL = 10;
+
+    targets.forEach(function (el) {
+      var raf = null;
+
+      function onMove(e) {
+        if (raf) return;
+        raf = window.requestAnimationFrame(function () {
+          var rect = el.getBoundingClientRect();
+          var px = Math.max(-1, Math.min(1, (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2)));
+          var py = Math.max(-1, Math.min(1, (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2)));
+          el.style.transform = "translate(" + (px * MAX_PULL).toFixed(1) + "px, " + (py * MAX_PULL).toFixed(1) + "px)";
+          raf = null;
+        });
+      }
+
+      el.addEventListener("mouseenter", function () {
+        el.addEventListener("mousemove", onMove);
+      });
+      el.addEventListener("mouseleave", function () {
+        el.removeEventListener("mousemove", onMove);
+        el.style.transform = "";
+      });
+    });
+  }
+
+  /* -----------------------------------------------------
      Formulário de contato (Netlify Forms via fetch)
      ----------------------------------------------------- */
   function initContactForm() {
@@ -604,6 +719,9 @@
     initScrollFX();
     initGlobe();
     initAstronaut();
+    initScrollProgress();
+    initInteractiveCards();
+    initMagneticButtons();
 
     window.requestAnimationFrame(function () {
       body.classList.add("is-loaded");
