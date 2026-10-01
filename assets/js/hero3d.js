@@ -63,6 +63,13 @@ import * as THREE from "./vendor/three.module.min.js";
       return new THREE.CanvasTexture(cnv);
     }
 
+    /* grupo com logo + anel + brilho, deslocado pra cima pra
+       ficar centralizado atrás do título (não do bloco inteiro
+       de texto, que é puxado pra baixo pelos tiles de serviço) */
+    var heroGroup = new THREE.Group();
+    heroGroup.position.y = 0.6;
+    scene.add(heroGroup);
+
     var glowSprite = new THREE.Sprite(
       new THREE.SpriteMaterial({
         map: makeGlowTexture(),
@@ -75,14 +82,14 @@ import * as THREE from "./vendor/three.module.min.js";
     glowSprite.scale.set(1.8, 1.8, 1);
     glowSprite.position.set(0, 0, -0.3);
     glowSprite.material.opacity = 0.65;
-    scene.add(glowSprite);
+    heroGroup.add(glowSprite);
 
     var ring = new THREE.Mesh(
       new THREE.RingGeometry(1.05, 1.08, 64),
       new THREE.MeshBasicMaterial({ color: 0xf5f3f1, transparent: true, opacity: 0.42, side: THREE.DoubleSide })
     );
     ring.position.set(0, 0, -0.25);
-    scene.add(ring);
+    heroGroup.add(ring);
 
     var ringGlow = new THREE.Mesh(
       new THREE.RingGeometry(1.0, 1.14, 64),
@@ -96,7 +103,7 @@ import * as THREE from "./vendor/three.module.min.js";
       })
     );
     ringGlow.position.set(0, 0, -0.26);
-    scene.add(ringGlow);
+    heroGroup.add(ringGlow);
 
     var loader = new THREE.TextureLoader();
     var logoTex = loader.load("assets/img/logo/lax-color.png");
@@ -108,7 +115,7 @@ import * as THREE from "./vendor/three.module.min.js";
       logoGeo,
       new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, opacity: 0.8 })
     );
-    scene.add(logoMesh);
+    heroGroup.add(logoMesh);
 
     var dustCount = 90;
     var dustGeo = new THREE.BufferGeometry();

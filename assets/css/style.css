@@ -524,7 +524,7 @@ body.has-fine-pointer .cursor-ring {
   z-index: 0;
   display: none;
   pointer-events: none;
-  background: radial-gradient(ellipse 60% 55% at 50% 62%, var(--color-surface) 15%, transparent 72%);
+  background: radial-gradient(ellipse 60% 55% at 50% 56%, rgba(20, 20, 20, 0.5) 15%, transparent 70%);
 }
 
 .hero.has-hero-webgl .hero-webgl-veil {
