@@ -1,8 +1,9 @@
 /* =========================================================
    LAXA — hero3d.js (experimental)
-   Cena 3D real (Three.js/WebGL) pro fundo do hero: o logo
-   LAX balançando da esquerda pra direita (câmera fixa, o
-   símbolo é quem orbita) com um brilho suave e poeira ambiente.
+   Cena 3D real (Three.js/WebGL) pro fundo do hero: o logo LAX
+   dá uma volta de 360° ao redor de um centro invisível (como um
+   planeta que nunca é desenhado, só serve de base da órbita),
+   com um brilho suave e poeira ambiente. Câmera fica parada.
    Entra no lugar do fundo de auroras em CSS quando o navegador
    suporta WebGL e o usuário não pediu movimento reduzido.
    Fallback automático pras auroras em qualquer outro caso
@@ -85,17 +86,20 @@ import * as THREE from "./vendor/three.module.min.js";
     glowSprite.material.opacity = 0.5;
     heroGroup.add(glowSprite);
 
+    /* sprite (não mesh) de propósito: sempre vira de frente pra
+       câmera sozinho, então o logo não "desaparece" nem vira de
+       perfil enquanto percorre a órbita toda ao redor do planeta
+       invisível */
     var loader = new THREE.TextureLoader();
     var logoTex = loader.load("assets/img/logo/lax-color.png");
     if ("colorSpace" in logoTex) logoTex.colorSpace = THREE.SRGBColorSpace;
     var aspect = 1569 / 789;
     var logoW = 1.9;
-    var logoGeo = new THREE.PlaneGeometry(logoW, logoW / aspect);
-    var logoMesh = new THREE.Mesh(
-      logoGeo,
-      new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, opacity: 0.8 })
+    var logoSprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({ map: logoTex, transparent: true, opacity: 0.8 })
     );
-    heroGroup.add(logoMesh);
+    logoSprite.scale.set(logoW, logoW / aspect, 1);
+    heroGroup.add(logoSprite);
 
     var dustCount = 90;
     var dustGeo = new THREE.BufferGeometry();
@@ -141,20 +145,24 @@ import * as THREE from "./vendor/three.module.min.js";
 
     var basePosY = heroGroup.position.y;
 
+    var ORBIT_SPEED = 0.22; // rad/s — uma volta completa a cada ~28,5s
+    var ORBIT_RADIUS_X = 1.4;
+    var ORBIT_RADIUS_Z = 1.1;
+    var ORBIT_TILT = 0.22; // inclina a órbita, como um planeta visto de leve ângulo
+
     function tick() {
       if (!running) return;
       requestAnimationFrame(tick);
       var t = clock.getElapsedTime();
 
-      /* o símbolo orbita de verdade: balança da esquerda pra
-         direita enquanto se aproxima/afasta da câmera, girando
-         sutilmente pra acompanhar a direção do movimento */
-      var swingSpeed = 0.3;
-      var phase = t * swingSpeed;
-      heroGroup.position.x = Math.sin(phase) * 1.3;
-      heroGroup.position.z = (Math.cos(phase) - 1) * 0.35;
-      heroGroup.position.y = basePosY + Math.sin(phase * 2) * 0.05;
-      heroGroup.rotation.y = Math.sin(phase) * 0.4;
+      /* o símbolo dá a volta inteira (360°) ao redor de um centro
+         fixo invisível ("o planeta"), que nunca é desenhado, só
+         serve de base pra órbita. Câmera fica parada; o sprite
+         sempre encara ela, então nunca vira de perfil/some. */
+      var angle = t * ORBIT_SPEED;
+      heroGroup.position.x = Math.sin(angle) * ORBIT_RADIUS_X;
+      heroGroup.position.z = Math.cos(angle) * ORBIT_RADIUS_Z - ORBIT_RADIUS_Z * 0.3;
+      heroGroup.position.y = basePosY + Math.sin(angle) * ORBIT_TILT;
 
       camera.position.x = mouseX * 0.3;
       camera.position.y = 0.3 - mouseY * 0.2;
