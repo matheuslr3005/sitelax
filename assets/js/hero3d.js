@@ -1,11 +1,12 @@
 /* =========================================================
    LAXA — hero3d.js (experimental)
    Cena 3D real (Three.js/WebGL) pro fundo do hero: o logo
-   LAX com um anel de luz, câmera orbitando devagar e poeira
-   ambiente. Entra no lugar do fundo de auroras em CSS quando
-   o navegador suporta WebGL e o usuário não pediu movimento
-   reduzido. Fallback automático pras auroras em qualquer
-   outro caso (mobile, sem WebGL, reduced-motion).
+   LAX balançando da esquerda pra direita (câmera fixa, o
+   símbolo é quem orbita) com um brilho suave e poeira ambiente.
+   Entra no lugar do fundo de auroras em CSS quando o navegador
+   suporta WebGL e o usuário não pediu movimento reduzido.
+   Fallback automático pras auroras em qualquer outro caso
+   (mobile, sem WebGL, reduced-motion).
    ========================================================= */
 import * as THREE from "./vendor/three.module.min.js";
 
@@ -81,29 +82,8 @@ import * as THREE from "./vendor/three.module.min.js";
     );
     glowSprite.scale.set(1.8, 1.8, 1);
     glowSprite.position.set(0, 0, -0.3);
-    glowSprite.material.opacity = 0.65;
+    glowSprite.material.opacity = 0.5;
     heroGroup.add(glowSprite);
-
-    var ring = new THREE.Mesh(
-      new THREE.RingGeometry(1.05, 1.08, 64),
-      new THREE.MeshBasicMaterial({ color: 0xf5f3f1, transparent: true, opacity: 0.42, side: THREE.DoubleSide })
-    );
-    ring.position.set(0, 0, -0.25);
-    heroGroup.add(ring);
-
-    var ringGlow = new THREE.Mesh(
-      new THREE.RingGeometry(1.0, 1.14, 64),
-      new THREE.MeshBasicMaterial({
-        color: 0xf5f3f1,
-        transparent: true,
-        opacity: 0.1,
-        side: THREE.DoubleSide,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      })
-    );
-    ringGlow.position.set(0, 0, -0.26);
-    heroGroup.add(ringGlow);
 
     var loader = new THREE.TextureLoader();
     var logoTex = loader.load("assets/img/logo/lax-color.png");
@@ -159,21 +139,29 @@ import * as THREE from "./vendor/three.module.min.js";
     var running = false;
     var clock = new THREE.Clock();
 
+    var basePosY = heroGroup.position.y;
+
     function tick() {
       if (!running) return;
       requestAnimationFrame(tick);
       var t = clock.getElapsedTime();
 
-      var radius = 4.6;
-      var angle = Math.sin(t * 0.16) * 0.5;
-      camera.position.x = Math.sin(angle) * radius + mouseX * 0.35;
-      camera.position.z = Math.cos(angle) * radius;
-      camera.position.y = 0.1 + Math.sin(t * 0.28) * 0.07 - mouseY * 0.25;
-      camera.lookAt(0, 0, 0);
+      /* o símbolo orbita de verdade: balança da esquerda pra
+         direita enquanto se aproxima/afasta da câmera, girando
+         sutilmente pra acompanhar a direção do movimento */
+      var swingSpeed = 0.3;
+      var phase = t * swingSpeed;
+      heroGroup.position.x = Math.sin(phase) * 1.3;
+      heroGroup.position.z = (Math.cos(phase) - 1) * 0.35;
+      heroGroup.position.y = basePosY + Math.sin(phase * 2) * 0.05;
+      heroGroup.rotation.y = Math.sin(phase) * 0.4;
 
-      logoMesh.rotation.y = Math.sin(t * 0.22) * 0.07;
-      ring.rotation.z = t * 0.045;
-      glowSprite.material.opacity = 0.6 + Math.sin(t * 1.1) * 0.08;
+      camera.position.x = mouseX * 0.3;
+      camera.position.y = 0.3 - mouseY * 0.2;
+      camera.position.z = 4.6;
+      camera.lookAt(0, basePosY, 0);
+
+      glowSprite.material.opacity = 0.45 + Math.sin(t * 1.1) * 0.08;
       dust.rotation.y = t * 0.018;
 
       renderer.render(scene, camera);
